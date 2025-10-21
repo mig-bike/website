@@ -1,6 +1,7 @@
 var minutes = document.getElementById("time_minutes");
 var hours = document.getElementById("time_hours");
 var seconds = document.getElementById("time_seconds");
+var time_input = document.getElementById("time_input");
 
 var curr_time_seconds = 0;
 var startTime;
@@ -9,7 +10,8 @@ var timerStarted = false;
 var interval;
 var last_time_started = 0;
 
-var time_input = document.getElementById("time_input");
+let study_time_tracker = [];
+
 time_input.addEventListener('change', (e) =>{
     setTime();
 });
@@ -39,6 +41,9 @@ function disable_Timer(b){
     seconds.disabled = b;
 }
 function timerEnded(){
+    if(last_time_started >= 300){
+        study_time_tracker.push([new Date(), last_time_started]);
+    }
     stopTimer();
     alert("Congratulations!");
 }
@@ -76,6 +81,10 @@ function resetTimer(){
         alert("Stop the timer first!");
     }
     else{
+        var v = last_time_started = curr_time_seconds;
+        if(v >= 300){
+            study_time_tracker.push([new Date(), v]);
+        }
         curr_time_seconds = last_time_started;
         displayTime_seconds(curr_time_seconds);
     }
@@ -125,4 +134,5 @@ seconds.addEventListener('change', (e) => {
         seconds.value = 0;
     }
     seconds.value = seconds.value - 0;
+
 });
