@@ -1,0 +1,42 @@
+okay local storage, (~10 mb)
+
+- to create new item in local storage, we call set item method
+and pass in two arguments (key for the item, value of the item)
+
+- we can only store strings in local storage, so before saving to local
+storage, we just have to JSON.stringify the value, and it should work well
+
+- then in order to access it again we can just parse it!
+
+okay, so for us, we need to do
+
+localStorage.setItem('timer_stats', array_with_timer_stats);
+or something,
+
+- RETRIEVAL
+localStorage.getItem(KEY) will just get it back,
+
+and in order to convert it back is to just json. parse.
+
+- if you want to retrieve all the values in local storage,
+
+if you try to set an item that already exists, it will just override it (which we want actually)
+
+we can also use session storage (but this will clear the data, which is something we might not want)
+
+
+CUSTOM HEADERS AND FOOTERS
+(https://www.youtube.com/watch?v=AiQqip_pVbA)
+(https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
+
+we need to stop rewriting the same code for everything. to do this,
+we simply have to use some javascript to define custom html elemnents,
+
+class customHeader extends HTMLElement {
+  connectedCallback(){
+    this.innerHTML = ' (insert html here) '
+  }
+}
+
+and then, we can use
+customElements.define(customname, class of element)

@@ -1,0 +1,77 @@
+.time_display {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.modify_timer_button {
+  color: white;
+  background-color: rgb(7, 108, 148);
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition-duration: 0.15s;
+}
+
+.modify_timer_button:hover {
+  background-color: rgb(0, 102, 255);
+}
+
+.modify_timer_button:active {
+  background-color: rgb(20, 46, 194);
+}
+
+.time_input_holder {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  justify-content: center;
+  margin: auto;
+}
+
+.timer_holder {
+  display: flex;
+  background-image: url("images/timer.png");
+  width: 50%;
+  height: 65%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 450px;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_holder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.timer_buttons{
+  max-width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  width: 75%;
+  margin: auto;
+}
+.stat_buttons{
+  width: 75%;
+  max-width: 600px;
+  margin: auto;
+}
+.stats{
+  max-width: 600px;
+  width: 75%;
+  color: white;
+  background-color: rgb(19, 150, 52);
+  border: none;
+  height: 30px;
+  cursor: pointer;
+}

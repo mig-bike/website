@@ -51,7 +51,9 @@ ul {
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  padding-right: 20px;
+  min-width: 400px;
 }
 
 .website {
@@ -70,12 +72,12 @@ ul {
   padding: 1em;
 }
 .content {
+  min-height: 800px;
   flex: 5;
 }
 .big-div{
     display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
-    min-height: 100vh;
+    grid-template-rows: 1fr 7fr 1fr;
 }
 .boxes {
   display: flex;

@@ -10,7 +10,16 @@ var timerStarted = false;
 var interval;
 var last_time_started = 0;
 
-let study_time_tracker = [];
+var study_time_tracker;
+
+function setTracker(){
+    if(localStorage.getItem("study_stats") === null){
+        study_time_tracker = [];
+    }
+    else{
+        study_time_tracker = JSON.parse(localStorage.getItem("study_stats"));
+    }
+}
 
 time_input.addEventListener('change', (e) =>{
     setTime();
@@ -42,7 +51,9 @@ function disable_Timer(b){
 }
 function timerEnded(){
     if(last_time_started >= 300){
+        setTracker();
         study_time_tracker.push([new Date(), last_time_started]);
+        localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
     }
     stopTimer();
     alert("Congratulations!");
@@ -81,9 +92,11 @@ function resetTimer(){
         alert("Stop the timer first!");
     }
     else{
-        var v = last_time_started = curr_time_seconds;
+        var v = last_time_started - curr_time_seconds;
         if(v >= 300){
+            setTracker();
             study_time_tracker.push([new Date(), v]);
+            localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
         }
         curr_time_seconds = last_time_started;
         displayTime_seconds(curr_time_seconds);
@@ -134,5 +147,4 @@ seconds.addEventListener('change', (e) => {
         seconds.value = 0;
     }
     seconds.value = seconds.value - 0;
-
 });
