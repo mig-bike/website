@@ -1,11 +1,11 @@
 var addItem = document.getElementById("add_item");
 var toDoListHolder = document.getElementById("todolist_holder");
 
-let items = [];
+var items = [];
 
-addItem.addEventListener('submit', (e) => {
+function addToDo(){
     items.push(addItem.value);
-});
+}
 
 function renderList(){
     var toDoList = toDoListHolder.innerHTML;

@@ -1,0 +1,13 @@
+.stats_holder{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: solid;
+  padding: 1em;
+}
+.statistic{
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
