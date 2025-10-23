@@ -1,5 +1,11 @@
-var statistics_array = JSON.parse(localStorage.getItem("study_stats"));
+var statistics_array;
 
+if(localStorage.getItem("study_stats") === null){
+  statistics_array = [];
+}
+else{
+  statistics_array = JSON.parse(localStorage.getItem("study_stats"));
+}
 /*
 we want to store stuff into an array, and ideally we should have an
 'earliest date' for the study timer, and then the 'last date'

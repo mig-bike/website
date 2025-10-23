@@ -1,0 +1,60 @@
+okay how would we even do this?
+
+- first, +create new deck should go to a new page.
+
+then we should have an input field for TITLE, DESCRIPTION, and then "add new card"
+can also just be "front" and "back"
+
+in general, the entire deck should be stored as an object, with
+
+obj. deck = {
+  title;
+  description;
+  array cards[];
+
+  - we should also add stuff like 
+  -> last_reviewed;
+  -> bad_cards;
+  -> good_cards;
+  // cards should then store like a card, which for now will just be front & back (so array of 2)
+}
+
+okay, and then when we convert to json hopefully it should work
+
+ok. so once they create a deck, they should also be able to edit it
+-> this can be done by just going back to the input fields and stuff?
+
+RENDERING
+
+-> for each deck, we should create a "DECK" class box object thing
+and then we can just put the title and description of that deck in there
+for the main page.
+** recall to add the edit button or something
+
+ACTUAL CARD FLIPPING
+
+once we have the deck we have to give them options to review it
+- okay, so first of all we should go ahead and loop through every single once
+in like 10 card chunks or so, until we get all the way to the end
+
+- for each one, we should find out how to play an animation and flip to back,
+
+there should be a couple buttons, all which go to the next card, and rate the understanding
+of the card
+
+for stat tracking we should be able to do the thing where they can track how many of each set 
+they got right and everything like that...
+
+so we have a plan,
+
+1. add edit/start buttons to each deck (CSS)
+2. make an HTML page for create new deck
+3. make <form> elt and then on submit, save to local storage
+4. figure out how to render decks properly
+5. do the editing functionality for the decks
+6. add review buttons and have it be able to loop through cards
+  a. add html page for a deck
+  b. make the buttons so that each one goes up one in the array
+  c. allow review of stuff they mark wrong (store in other array, figure it out)
+7. add stat tracking
+

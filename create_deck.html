@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="style/styles.css" />
+    <link rel="stylesheet" href="flashcard_style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <base target="_blank" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <div class="big-div">
+      <custom-header></custom-header>
+      <div class="website">
+        <div class="content">
+          <div class="create-deck-holder">
+            <div class="create-deck-intro">
+              <form
+                target="_self"
+                method="post"
+                id="deck_creater"
+                class="deck_creater_holder"
+              >
+                <label for="name">Name:</label>
+                <input
+                  class="deck-builder"
+                  type="number"
+                  id="name_deck"
+                  name="name"
+                />
+                <label for="description">Description:</label>
+                <input
+                  class="deck-builder"
+                  type="number"
+                  id="describe_deck"
+                  name="description"
+                />
+              </form>
+              <div>
+                Type below to add a card:
+              </div>
+              <form target="_self" method="post" id="card_inputs" class="card_inputs">
+                <label for="front">FRONT:</label>
+                <input type="text" name="front" id="front_of_card">
+                <label for="back">BACK:</label>
+                <input type="text" name="back" id="back_of_cards">
+              </form>
+              <button id="add_card">ADD ABOVE CARD</button>
+              <button id="view_card">VIEW CURRENT CARDS</button>
+              <button id="save_deck">SAVE DECK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <custom-footer></custom-footer>
+    </div>
+    <script src="custom_html.js"></script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+we want to make it so that people can do the notes
+
+- appendChild() will add a node to the end of the list of children
+of a parent node, 
+
+child is something to append 
+
+> we need to do something like
+
+ELT.appendChild(list_element)
+
+if we have a ul element, we should be able to just append li elements but
+and as long as we do textContent, we should be good?

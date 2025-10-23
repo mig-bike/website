@@ -1,17 +1,74 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <base target="_blank">
-        <title>Flashcards</title>
-    </head>
-    <body>
-        <custom-header></custom-header>
-        <custom-footer></custom-footer>
-        <script src="custom_html.js"></script>
-    </body>
+  <head>
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="style/styles.css" />
+    <link rel="stylesheet" href="flashcard_style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <base target="_blank" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <div class="big-div">
+      <custom-header></custom-header>
+      <div class="website">
+        <div class="content">
+          <div class="flashcard_holder">
+            <div class="titles_flashcards">
+                <div class="welcome_flashcards">
+                    Select your deck!
+                </div>
+                <div>
+                    <a href="/create_deck.html">
+                        <button class="create_deck">
+                        + Create New Deck
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="decks_flashcards">
+                <div class="deck">
+                    <div class="flashcard_title">
+                        title
+                    </div>
+                    <div class="flashcard_description">
+                        description
+                    </div>
+                </div>
+                <div class="deck">
+                    <div class="flashcard_title">
+                        title
+                    </div>
+                    <div class="flashcard_description">
+                        description
+                    </div>
+                </div>
+                <div class="deck">
+                    <div class="flashcard_title">
+                        title
+                    </div>
+                    <div class="flashcard_description">
+                        description
+                    </div>
+                </div>
+            </div>
+
+            <div class="view_stats_flashcards">
+                <button class="stat_flashcard_button">View stats!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <custom-footer></custom-footer>
+    </div>
+    <script src="custom_html.js"></script>
+  </body>
 </html>
