@@ -13,42 +13,92 @@ var streak = 0;
 
 var day_to_studyTime = new Map();
 
-function log_time_in_map(day_to_log, seconds_to_log){
+function log_time_in_map(day_to_log, seconds_to_log) {
   var current_time_in_day = day_to_studyTime.get(day_to_log);
-  if(current_time_in_day === undefined){
+  if (current_time_in_day === undefined) {
     day_to_studyTime.set(day_to_log, seconds_to_log);
-  }
-  else{
+  } else {
     day_to_studyTime.set(day_to_log, current_time_in_day + seconds_to_log);
   }
 }
-
-function findVariables(){
-  for(var i = 0; i < statistics_array.length; i++){
-    let date_logged = statistics_array[i][0];
+function findVariables() {
+  let earliest_day = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); //this is by default set to today (look below)
+  //ok basically what below does is it goes and fills the map
+  //with what we want, days since epoch -> our stuff
+  for (var i = 0; i < statistics_array.length; i++) {
+    let date_logged = Date.parse(statistics_array[i][0]);
     let time_seconds_logged = statistics_array[i][1];
 
-    let millis_since_epoch = date_logged.now();
-    let days_since_epoch = Math.floor(millis_since_epoch / (1000 * 60 * 60 * 24));
-    
-    let finished_hours = date_logged.getHours();
-    let finished_minutes = date_logged.getMinutes();
-    let finished_seconds = date_logged.getSeconds();
+    let millis_since_epoch = date_logged;
+    let days_since_epoch = Math.floor(
+      millis_since_epoch / (1000 * 60 * 60 * 24)
+    );
 
-    let seconds_of_current_day = finished_hours * 3600 + finished_minutes * 60 + finished_seconds * 1;
-    if(seconds_of_current_day < time_seconds_logged){
+    let date_logged_obj = new Date(date_logged);
+    let finished_hours = date_logged_obj.getHours();
+    let finished_minutes = date_logged_obj.getMinutes();
+    let finished_seconds = date_logged_obj.getSeconds();
+
+    let seconds_of_current_day =
+      finished_hours * 3600 + finished_minutes * 60 + finished_seconds * 1;
+    if (seconds_of_current_day < time_seconds_logged) {
       log_time_in_map(days_since_epoch, seconds_of_current_day);
-      log_time_in_map(days_since_epoch - 1, time_seconds_logged - seconds_of_current_day);
-    }
-    else{
+      log_time_in_map(
+        days_since_epoch - 1,
+        time_seconds_logged - seconds_of_current_day
+      );
+    } else {
       log_time_in_map(days_since_epoch, time_seconds_logged);
+    }
+
+    if (i === 0) {
+      earliest_day = days_since_epoch - 2;
     }
     total_time += time_seconds_logged;
   }
 
-  var today = new Date();
-  let millis_since_epoch = today.now();
+  //this finds time_today
+  let millis_since_epoch = Date.now();
   let days_since_epoch = Math.floor(millis_since_epoch / (1000 * 60 * 60 * 24));
 
-  time_today = day_to_studyTime(days_since_epoch);
+  time_today = day_to_studyTime.get(days_since_epoch);
+
+
+  //study streak
+  let current_day = days_since_epoch;
+  while (day_to_studyTime.get(current_day) != undefined) {
+    streak++;
+    current_day--;
+  }
+
+  //max time day
+  for (var i = earliest_day; i <= days_since_epoch; i++) {
+    //console.log("EARLIEST_DAY: " + earliest_day);
+    //console.log("CURRENT DAY: " + days_since_epoch);
+    if (day_to_studyTime.get(i) != undefined) {
+      //console.log("hello");
+      max_time_day = Math.max(max_time_day, day_to_studyTime.get(i));
+    }
+  }
+
+  //time this week
+
+  let day_today = new Date(millis_since_epoch);
+  let day_of_week = day_today.getDay();
+
+  for (var i = 0; i <= day_of_week; i++) {
+    if (day_to_studyTime.get(days_since_epoch - i) != undefined)
+      time_this_week += day_to_studyTime.get(days_since_epoch - i);
+  }
 }
+
+var total_time_html = document.getElementById("total_study_time");
+var max_time_day_html = document.getElementById("most_study_time");
+var time_this_week_html = document.getElementById("daily_study_time");
+var time_today = document.getElementById("weekly_study_time");
+var streak = document.getElementById("study_streak");
+
+document.addEventListener("DOMContentLoaded", function(){
+  findVariables();
+  total_time_html.innerHTML += total_time + "s";
+}); 
