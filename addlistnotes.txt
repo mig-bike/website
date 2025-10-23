@@ -11,3 +11,5 @@ ELT.appendChild(list_element)
 
 if we have a ul element, we should be able to just append li elements but
 and as long as we do textContent, we should be good?
+
+// in local storage we should just have a list of these deck things
