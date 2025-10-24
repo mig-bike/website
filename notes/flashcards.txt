@@ -58,3 +58,10 @@ so we have a plan,
   c. allow review of stuff they mark wrong (store in other array, figure it out)
 7. add stat tracking
 
+
+
+- we need allow the thing to flip, 
+okay so we need
+1. outer div for inner stuff
+2. front
+2. back

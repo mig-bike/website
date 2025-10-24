@@ -1,7 +1,7 @@
 var deck_array;
 var decks_flashcards = document.getElementById("decks_flashcards");
 
-var all_decks = document.querySelectorAll("div.deck");
+var all_decks;
 
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -17,10 +17,14 @@ document.addEventListener("DOMContentLoaded", function(){
 
   render_deck();
 
+  all_decks = document.querySelectorAll("a.deck");
+
   //adds event listeners to set the last deck clicked to a value so we can access it later
   for(var i = 0; i < all_decks.length; i++){
-    all_decks[i].addEventListener("click", function(){
-      localStorage.setItem("last_deck_clicked", JSON.stringify(all_decks[i].id));
+    console.log(i);
+    all_decks[i].addEventListener("click", function(e){
+      console.log(this.id);
+      localStorage.setItem("last_deck_clicked", this.id);
       //sets item in local storage to the last deck clicked, which we will then use to render
       //the following page
     });

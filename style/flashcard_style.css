@@ -181,3 +181,46 @@
   transform: translate(10px, 10px);
   background-color: rgb(180, 180, 180);
 }
+
+.current_deck{
+  text-align: center;
+}
+
+.deck_holder{
+  perspective: 200px;
+}
+
+.flashcard_animated, .flashcard_animated_flipped{
+  margin: auto;
+  justify-content: center;
+  min-width: 200px;
+  max-width: 300px;
+  min-height: 200px;
+  border: none;
+  padding-top: 15px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  box-shadow: 7px 7px 5px rgb(196, 196, 196);
+  transition-duration: 0.5s;
+  cursor: pointer;
+
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.flashcard_animated_flipped{
+  transform: rotateY(180 deg);
+}
+
+.flashcard_animated_front, .flashcard_animated_back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: black;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flashcard_animated_back{
+  transform: rotateY(180 deg);
+}
