@@ -170,3 +170,13 @@
   justify-content: center;
   color: black;
 }
+
+.flashcard:hover{
+  background-color: rgb(240, 240, 240);
+}
+
+.flashcard:active{
+  box-shadow: none;
+  transform: translate(10px, 10px);
+  background-color: rgb(180, 180, 180);
+}
