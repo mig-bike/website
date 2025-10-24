@@ -8,6 +8,8 @@ var deck_viewer = document.getElementById("deck_viewer");
 
 var deck_is_viewed = false;
 
+
+//class for the deck of flashcards, it should have a name, description, and deck
 class deck_of_cards {
   constructor(name_of_deck, description, deck){
     this.name_of_deck = name_of_deck;
@@ -15,10 +17,14 @@ class deck_of_cards {
     this.deck = deck;
   }
 }
+
+
+// initalizes variables
 var deck_of_decks;
 var current_deck_of_cards = new deck_of_cards();
 var current_deck = [];
 
+//sets deck of decks to value if it can get it from local storage
 if(localStorage.getItem("deck_of_decks") === null){
   deck_of_decks = [];
 }
@@ -26,6 +32,7 @@ else{
   deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
 }
 
+//adds a card based on front and back input
 function add_card(){
   let front = front_of_card.value;
   let back = back_of_card.value;
@@ -38,6 +45,7 @@ function add_card(){
   }
 }
 
+//makes a deck based on the current values (must be filled out), returns false early if not
 function makeDeck(){
   if(name_box.value == ""){
     return false;
@@ -52,6 +60,8 @@ function makeDeck(){
   return true;
 }
 
+
+//toggles card viewing
 function view_cards(){
   if(current_deck.length === 0){
     alert("No cards to render!");
@@ -67,6 +77,7 @@ function view_cards(){
   }
 }
 
+//renders cards
 function render_cards(){
   deck_viewer.innerHTML = "";
     for(var i = 0; i < current_deck.length; i++){
@@ -79,6 +90,7 @@ function unrender_cards(){
   deck_viewer.innerHTML = "";
 }
 
+//representation of each flashcard in dom
 function makeFlashcard(front, back){
   let flashcard = document.createElement("div");
   flashcard.className = "flashcard";
@@ -98,7 +110,13 @@ function makeFlashcard(front, back){
   return flashcard;
 }
 
+//saves the deck to localstorage
+/*
+- if we already saved the deck in the session, we don't want to make a new deck, so it will just replace it
+- if we did not already saved the deck, we do want to make a new deck
 
+user must make a new session to make a new deck
+*/
 function save_deck(){
   if(sessionStorage.getItem("already_saved") != null){ //we will check if they already saved a deck, which means we shouldn't push it again
     makeDeck();

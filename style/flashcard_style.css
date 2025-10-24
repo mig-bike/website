@@ -43,6 +43,7 @@
   box-shadow: 7px 7px 5px rgb(196, 196, 196);
   transition-duration: 0.15s;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .deck:hover{

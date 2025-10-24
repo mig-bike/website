@@ -44,11 +44,15 @@ function displayTime_seconds(s){
     displayTime(h, m, s);
 }
 
+//enables/disables input
+
 function disable_Timer(b){
     minutes.disabled = b;
     hours.disabled = b;
     seconds.disabled = b;
 }
+
+//tracks time if timer ends
 function timerEnded(){
     if(last_time_started >= 300){
         setTracker();
@@ -59,6 +63,8 @@ function timerEnded(){
     alert("Congratulations!");
 }
 
+
+//starts the timer
 function startTimer(){
     if(!timerStarted){
         disable_Timer(true);
@@ -76,6 +82,7 @@ function startTimer(){
     }
 }
 
+//stops the timer, and enables inputs into the timer again
 function stopTimer(){
     if(timerStarted){
         timerStarted = false;
@@ -87,6 +94,7 @@ function stopTimer(){
     }
 }
 
+//resets timer back to last set time, if timer is stopped
 function resetTimer(){
     if(timerStarted){
         alert("Stop the timer first!");
@@ -102,7 +110,7 @@ function resetTimer(){
         displayTime_seconds(curr_time_seconds);
     }
 }
-
+//clears timer, only if the timer is stopped
 function clearTimer(){
     if(timerStarted){
         alert("Stop the timer first!");
@@ -112,7 +120,7 @@ function clearTimer(){
         displayTime_seconds(curr_time_seconds);
     }
 }
-
+//below is just verification to make sure that each one of the timer inputs are valid
 hours.addEventListener('change', (e) => {
     if(hours.value > 23 || hours.value < 0){
         alert("Please enter a value between 0 and 23 for hours");

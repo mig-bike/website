@@ -1,16 +1,34 @@
-
 var deck_array;
 var decks_flashcards = document.getElementById("decks_flashcards");
 
-if(localStorage.getItem("deck_of_decks") === null){
-  deck_array = [];
-}
-else{
-  deck_array = JSON.parse(localStorage.getItem("deck_of_decks"));
-}
+var all_decks = document.querySelectorAll("div.deck");
 
-render_deck();
 
+document.addEventListener("DOMContentLoaded", function(){
+
+  //tries to pull a deck of decks from local storage
+  console.log("hello");
+  if(localStorage.getItem("deck_of_decks") === null){
+    deck_array = [];
+  }
+  else{
+    deck_array = JSON.parse(localStorage.getItem("deck_of_decks"));
+  }
+
+  render_deck();
+
+  //adds event listeners to set the last deck clicked to a value so we can access it later
+  for(var i = 0; i < all_decks.length; i++){
+    all_decks[i].addEventListener("click", function(){
+      localStorage.setItem("last_deck_clicked", JSON.stringify(all_decks[i].id));
+      //sets item in local storage to the last deck clicked, which we will then use to render
+      //the following page
+    });
+  }
+}); 
+
+
+//renders the deck
 function render_deck(){
   decks_flashcards.innerHTML = "";
     for(var i = 0; i < deck_array.length; i++){
@@ -23,8 +41,10 @@ function unrender_deck(){
   decks_flashcards.innerHTML = "";
 }
 
+//what each deck looks like
 function makeDeck(title, description, index){
-  let deck = document.createElement("div");
+  let deck = document.createElement("a");
+  deck.href = "review_deck.html"; //sets this up
   deck.className = "deck";
   deck.id = index;
 

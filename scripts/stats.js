@@ -19,6 +19,7 @@ var streak = 0;
 
 var day_to_studyTime = new Map();
 
+//adds the time, seconds_to_log, to day_to_log
 function log_time_in_map(day_to_log, seconds_to_log) {
   var current_time_in_day = day_to_studyTime.get(day_to_log);
   if (current_time_in_day === undefined) {
@@ -35,16 +36,23 @@ function findVariables() {
     let date_logged = Date.parse(statistics_array[i][0]);
     let time_seconds_logged = statistics_array[i][1];
 
+    //gets days since the epoch, which we will use to fill out our map
     let millis_since_epoch = date_logged;
     let days_since_epoch = Math.floor(
       millis_since_epoch / (1000 * 60 * 60 * 24)
     );
 
+
+    /*
+    this date is so we can work with the gethours, getminutes, getseconds,
+    in case there is overflow since the last day
+    */
     let date_logged_obj = new Date(date_logged);
     let finished_hours = date_logged_obj.getHours();
     let finished_minutes = date_logged_obj.getMinutes();
     let finished_seconds = date_logged_obj.getSeconds();
 
+    //calculates overflow, implements it
     let seconds_of_current_day =
       finished_hours * 3600 + finished_minutes * 60 + finished_seconds * 1;
     if (seconds_of_current_day < time_seconds_logged) {
@@ -57,6 +65,7 @@ function findVariables() {
       log_time_in_map(days_since_epoch, time_seconds_logged);
     }
 
+    //lower bound for the earliest day, which we will loop through for total time
     if (i === 0) {
       earliest_day = days_since_epoch - 2;
     }
@@ -98,6 +107,8 @@ function findVariables() {
   }
 }
 
+
+// gets the html elements by id to display each var
 var total_time_html = document.getElementById("total_study_time");
 var max_time_day_html = document.getElementById("most_study_time");
 var time_this_week_html = document.getElementById("daily_study_time");

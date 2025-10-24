@@ -1,11 +1,7 @@
 body {
   font-family: Roboto, Arial;
   font-size: 24px;
-  background-image: radial-gradient(
-    circle at center,
-    rgb(2, 46, 61),
-    rgb(8, 35, 48)
-  );
+  background-color: rgb(36, 35, 35);
   margin: 0 auto;
   padding: 0 auto;
 }
