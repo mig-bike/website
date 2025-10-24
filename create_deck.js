@@ -15,11 +15,11 @@ var deck_of_decks;
 var current_deck_of_cards = new deck_of_cards();
 var current_deck = [];
 
-if(localStorage.get("deck_of_decks") = undefined){
-  var deck_of_decks = [];  
+if(localStorage.getItem("deck_of_decks") === null){
+  deck_of_decks = [];
 }
 else{
-  var deck_of_decks = localStorage.get("deck_of_decks");
+  deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
 }
 
 function add_card(){
@@ -40,20 +40,22 @@ function makeDeck(){
   if(current_deck == []){
     return false;
   }
-  let current_deck_of_cards = new deck_of_cards(name_box.value, description_box.value, current_deck);
+  current_deck_of_cards = new deck_of_cards(name_box.value, description_box.value, current_deck);
+  return true;
 }
 
 function save_deck(){
-  if(sessionStorage.getItem("already_saved") != undefined){ //we will check if they already saved a deck, which means we shouldn't push it again
+  if(sessionStorage.getItem("already_saved") != null){ //we will check if they already saved a deck, which means we shouldn't push it again
     makeDeck();
-    deck_of_decks[JSON.parse(sessionStorage.getItem("already_saved"))] = deck_of_cards;
+    deck_of_decks[JSON.parse(sessionStorage.getItem("already_saved"))] = current_deck_of_cards;
+    localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
     //the above should make it so that the deck of decks will replace our old (current) deck with the new stuff they put in / out
   }
   else{
     //push deck
     if(makeDeck() === true){    
       deck_of_decks.push(current_deck_of_cards);
-      localStorage.setItem("deck_of_decks", deck_of_decks);
+      localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
       sessionStorage.setItem("already_saved", JSON.stringify(deck_of_decks.length - 1));
     }
     else{

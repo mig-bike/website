@@ -31,14 +31,14 @@
                 <label for="name">Name:</label>
                 <input
                   class="deck-builder"
-                  type="number"
+                  type="text"
                   id="name_deck"
                   name="name"
                 />
                 <label for="description">Description:</label>
                 <input
                   class="deck-builder"
-                  type="number"
+                  type="text"
                   id="describe_deck"
                   name="description"
                 />
@@ -52,9 +52,9 @@
                 <label for="back">BACK:</label>
                 <input type="text" name="back" id="back_of_cards">
               </form>
-              <button id="add_card">ADD ABOVE CARD</button>
+              <button id="add_card" onclick="add_card()">ADD ABOVE CARD</button>
               <button id="view_card">VIEW CURRENT CARDS</button>
-              <button id="save_deck">SAVE DECK</button>
+              <button id="save_deck" onclick="save_deck()">SAVE DECK</button>
             </div>
           </div>
         </div>
@@ -62,5 +62,6 @@
       <custom-footer></custom-footer>
     </div>
     <script src="custom_html.js"></script>
+    <script src="create_deck.js"></script>
   </body>
 </html>
