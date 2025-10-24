@@ -3,8 +3,8 @@
 <html>
   <head>
     <title>Flashcards</title>
-    <link rel="stylesheet" href="style/styles.css" />
-    <link rel="stylesheet" href="flashcard_style.css" />
+    <link rel="stylesheet" href="../style/styles.css" />
+    <link rel="stylesheet" href="../style/flashcard_style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
@@ -53,15 +53,17 @@
                 <input type="text" name="back" id="back_of_cards">
               </form>
               <button id="add_card" onclick="add_card()">ADD ABOVE CARD</button>
-              <button id="view_card">VIEW CURRENT CARDS</button>
+              <button id="view_card" onclick="view_cards()">VIEW CURRENT CARDS</button>
               <button id="save_deck" onclick="save_deck()">SAVE DECK</button>
+            </div>
+            <div id="deck_viewer" class="flashcards_holder">
             </div>
           </div>
         </div>
       </div>
       <custom-footer></custom-footer>
     </div>
-    <script src="custom_html.js"></script>
-    <script src="create_deck.js"></script>
+    <script src="../scripts/custom_html.js"></script>
+    <script src="../scripts/create_deck.js"></script>
   </body>
 </html>

@@ -34,7 +34,7 @@
 
 .timer_holder {
   display: flex;
-  background-image: url("images/timer.png");
+  background-image: url("../images/timer.png");
   width: 50%;
   height: 65%;
   background-repeat: no-repeat;

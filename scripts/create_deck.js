@@ -4,6 +4,10 @@ var description_box = document.getElementById("describe_deck");
 var front_of_card = document.getElementById("front_of_card");
 var back_of_card = document.getElementById("back_of_cards");
 
+var deck_viewer = document.getElementById("deck_viewer");
+
+var deck_is_viewed = false;
+
 class deck_of_cards {
   constructor(name_of_deck, description, deck){
     this.name_of_deck = name_of_deck;
@@ -28,6 +32,10 @@ function add_card(){
 
   let card = [front, back];
   current_deck.push(card);
+
+  if(deck_is_viewed){
+    render_cards();
+  }
 }
 
 function makeDeck(){
@@ -43,6 +51,53 @@ function makeDeck(){
   current_deck_of_cards = new deck_of_cards(name_box.value, description_box.value, current_deck);
   return true;
 }
+
+function view_cards(){
+  if(current_deck.length === 0){
+    alert("No cards to render!");
+  }
+  else{
+    if(!deck_is_viewed){
+      render_cards();
+    }
+    else{
+      unrender_cards();
+    }
+    deck_is_viewed = !deck_is_viewed;
+  }
+}
+
+function render_cards(){
+  deck_viewer.innerHTML = "";
+    for(var i = 0; i < current_deck.length; i++){
+      let flashcard = makeFlashcard(current_deck[i][0], current_deck[i][1]);
+      deck_viewer.appendChild(flashcard);
+    }
+}
+
+function unrender_cards(){
+  deck_viewer.innerHTML = "";
+}
+
+function makeFlashcard(front, back){
+  let flashcard = document.createElement("div");
+  flashcard.className = "flashcard";
+
+  let flashcard_front = document.createElement("div");
+  let flashcard_back = document.createElement("div");
+  
+  flashcard_front.className = "flashcard_front";
+  flashcard_back.className = "flashcard_back";
+
+  flashcard_front.innerHTML = front;
+  flashcard_back.innerHTML = back;
+
+  flashcard.appendChild(flashcard_front);
+  flashcard.appendChild(flashcard_back);
+
+  return flashcard;
+}
+
 
 function save_deck(){
   if(sessionStorage.getItem("already_saved") != null){ //we will check if they already saved a deck, which means we shouldn't push it again

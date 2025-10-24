@@ -45,7 +45,7 @@ ul {
 }
 
 .header-link-cont {
-  flex: 1;
+  height: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -109,7 +109,7 @@ ul {
   justify-content: center;
   background-color: gray;
   padding: 1em;
-  flex: 1;
+  height: 50px;
 }
 
 footer {
