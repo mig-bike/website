@@ -6,7 +6,6 @@ var current_deck = deck_of_decks[index_of_deck];
 var current_index = 0;
 
 /*
-
 okay, we need to 
 1. show deck
 2. allow user to go forward / back with necessary buttons
@@ -20,11 +19,35 @@ but also we need another storage for the don't/got it part things
 */
 document.addEventListener("DOMContentLoaded", function(){
     render_current_deck();
+    let name_elt = document.getElementById("name");
+    name_elt.innerHTML = "currently reviewing: " + current_deck.name_of_deck;
 }); 
 
+function back(){
+    current_index--;
+    render_current_deck();
+}
+
+function advance_deck(){
+    current_index++;
+    render_current_deck();
+}
+
+function dont_got_it(){
+    advance_deck();
+}
+
+function kinda_got_it(){
+    advance_deck();
+}
+
+function got_it(){
+    advance_deck();
+}
+
 function render_current_deck(){
-    if(current_index >= current_deck.length){
-        current_index = current_index % current_deck.length;
+    if(current_index >= current_deck.deck.length || current_index < 0){
+        current_index = (current_index + current_deck.deck.length) % current_deck.deck.length;
     }
     
     let deck_holder = document.getElementById("current_deck");

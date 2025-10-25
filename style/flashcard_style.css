@@ -184,8 +184,10 @@
 
 .deck_holder{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
 .current_deck{
@@ -218,14 +220,14 @@
 
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .flashcard_animated.flipped{
   transform: rotateY(180deg) rotateZ(180deg);
-}
-
-.flashcard_animated_front{
-  
 }
 
 .flashcard_animated_back{
