@@ -34,12 +34,7 @@ function render_current_deck(){
     deck_holder.appendChild(top_flashcard);
     
     top_flashcard.addEventListener("click", function(){
-        if(this.className === "flashcard_animated"){
-            this.className = "flashcard_animated_flipped";
-        }
-        else{
-            this.className = "flashcard_animated"
-        }
+        this.classList.toggle('flipped');
     });
 }
 

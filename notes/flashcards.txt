@@ -65,3 +65,11 @@ okay so we need
 1. outer div for inner stuff
 2. front
 2. back
+
+- container for the card
+-- card 
+--- front and back of card
+
+used: https://www.youtube.com/watch?v=NCLdf661ILE
+https://3dtransforms.desandro.com/card-flip
+to help with this
