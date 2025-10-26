@@ -27,6 +27,8 @@
 .todo_text{
   width: 400px;
   text-wrap: wrap;
+  overflow-wrap: break-word;
+  word-break: break-all;
   color: black;
 }
 
