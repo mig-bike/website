@@ -112,13 +112,13 @@ function makeDeck() {
 }
 
 function save_current_cards() {
+  current_deck = [];
   let array_of_flashcards = deck_viewer.children;
-  for (var i = 0; i < current_deck.length; i++) {
+  for (var i = 0; i < array_of_flashcards.length; i++) {
     let ith_flashcard = array_of_flashcards[i];
     let front_of_ith_flashcard = ith_flashcard.children[0].innerHTML;
     let back_of_ith_flashcard = ith_flashcard.children[1].innerHTML;
-    current_deck[i][0] = front_of_ith_flashcard;
-    current_deck[i][1] = back_of_ith_flashcard; //updates values for current deck
+    current_deck.push([front_of_ith_flashcard, back_of_ith_flashcard]);
   }
 }
 
@@ -140,48 +140,29 @@ function view_cards(){
 }
   */
 
+function delete_a_card(e){
+  if(e.target.parentElement.className === "flashcard delete_card_background"){
+        e.target.parentElement.remove();
+        //we could do something with .id to save the cards, but for now, this is the best way
+        //and it is generalizable.
+      }
+}
+
 function delete_cards() {
   let array_of_flashcards = deck_viewer.children;
-
-  if (delete_mode === true) {
-    for (var i = 0; i < current_deck.length; i++) {
+  for (var i = 0; i < current_deck.length; i++) {
       let ith_flashcard = array_of_flashcards[i];
-      let actual_card = current_deck[i]; //this stores the actual card content, not the HTML of it
-
-      //the below removes event listeners to delete itself
-      console.log("event listener removed");
-      ith_flashcard.removeEventListener("click", function () {
-        console.log("hello");
-        delete_self(actual_card);
-      }, false);
-
       ith_flashcard.classList.toggle("delete_card_background");
     }
-  } else {
-    for (var i = 0; i < current_deck.length; i++) {
-      let ith_flashcard = array_of_flashcards[i];
-      let actual_card = current_deck[i]; //this stores the actual card content, not the HTML of it
 
-      //the below adds event listeners to delete itself
-      console.log("event listener added");
-      ith_flashcard.addEventListener("click", function () {
-        console.log("hello");
-        delete_self(actual_card);
-      }, false);
-      ith_flashcard.classList.toggle("delete_card_background");
-    }
+  if(!delete_mode){
+    deck_viewer.addEventListener("click", delete_a_card);
+  }
+  else{
+    deck_viewer.removeEventListener("click", delete_a_card);
   }
   
   delete_mode = !delete_mode;
-}
-
-//deletes cards
-//as a result, we must prevent duplicate cards!
-function delete_self(card_to_delete) {
-  console.log("trying to delete" + card_to_delete);
-  let index_within_current_deck = current_deck.indexOf(card_to_delete);
-  current_deck.splice(index_within_current_deck, 1);
-  render_cards();
 }
 
 //renders cards
@@ -241,6 +222,8 @@ function edit_deck() {
 user must make a new session to make a new deck
 */
 function save_deck() {
+  save_current_cards();
+
   if (sessionStorage.getItem("current_deck_index") != null) {
     //we will check if they already saved a deck, which means we shouldn't push it again
     if (makeDeck() === true) {
