@@ -4,10 +4,10 @@ var addItem = document.getElementById("add_item");
 var list_html;
 
 function setListHtml(){
-    if (localStorage.getItem("to_do_list") === null) {
+    if (localStorage.getItem("list_html") === null) {
   list_html = "";
 } else {
-  list_html = JSON.parse(localStorage.getItem("to_do_list"));
+  list_html = JSON.parse(localStorage.getItem("list_html"));
 }
 }
 setListHtml();
@@ -16,7 +16,7 @@ renderList();
 //render item & save
 function addToDo() {
   addElementToList(addItem.value);
-  localStorage.setItem("to_do_list", JSON.stringify(todolist_holder.innerHTML));
+  localStorage.setItem("list_html", JSON.stringify(todolist_holder.innerHTML));
 }
 
 todolist_holder.addEventListener("click", function (e) {
@@ -26,12 +26,12 @@ todolist_holder.addEventListener("click", function (e) {
 
   if (e.target.id === "delete_button") {
     todo_item.remove();
-    localStorage.setItem("to_do_list", JSON.stringify(todolist_holder.innerHTML));
+    localStorage.setItem("list_html", JSON.stringify(todolist_holder.innerHTML));
   } else if (e.target.id === "check_button") {
     e.target.classList.toggle("checked");
     var todo_text = todo_item.querySelector(".todo_text");
     todo_text.classList.toggle("checked");
-    localStorage.setItem("to_do_list", JSON.stringify(todolist_holder.innerHTML));
+    localStorage.setItem("list_html", JSON.stringify(todolist_holder.innerHTML));
   }
 });
 
