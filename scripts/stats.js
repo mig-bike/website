@@ -118,4 +118,8 @@ var streak = document.getElementById("study_streak");
 document.addEventListener("DOMContentLoaded", function(){
   findVariables();
   total_time_html.innerHTML += total_time + "s";
+  max_time_day_html.innerHTML += max_time_day + "s";
+  time_this_week_html.innerHTML += time_this_week + "s";
+  time_today.innerHTML += time_today + "s";
+  streak.innerHTML = streak;
 }); 
