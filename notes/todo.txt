@@ -1,0 +1,22 @@
+- Finish todolist stuff
+- Delete note-taker thing (probably not useful)
+
+1. Write flashcard review code
+- Find way to review stuff that wasn't learned (store into unlearned / learned piles in flashcards)
+- Do research on this kind of stuff
+- Write stats file for it (tbh it might look better if timer / flashcard / todo stats can be in the same page)
+
+2. Write CSS 
+- Make stuff look better
+- Find a cooler font and make it look minimalistic
+- Maybe ditch some of the images?
+
+3. Finish todo list
+- Finish CSS for it, be able to cross out onclick of buttons
+
+4. Write stats for timer / flashcards / todo
+- Flashcards, do the # of cards reviewed / decks learned type thing, do streaks as well
+- Todo, if we could do a thing with like number of tasks finished that would be cool as well.
+- For timer, try to figure out if we can do a graph
+
+5. Find out how to make it so people can download JSON files from our website & import them back into local storage or whatever
