@@ -13,8 +13,18 @@ var last_time_started = 0;
 var study_time_tracker;
 var currently_pomodoro = false;
 var pomodoro_value;
+var time_of_break;
+var time_of_study;
+var currently_on_break = false;
 
 var number_of_pomodoros = 0;
+/*
+pomodoro timer should:
+1. set the time to correct amount
+2. set a timer ("time to break") after the timer expires
+3. repeat this process for a set number of times, upon which a "big break" is triggered
+4. repeat this whole process until the user stops it.
+*/
 
 function setTracker(){
     if(localStorage.getItem("study_stats") === null){
@@ -39,16 +49,47 @@ function pomodoro2(){
 
 function pomodoro_set(time_to_study, time_to_break, pomodoro_type){
     //sets time and disables timer, waiting for user to start.
-    minutes.innerHTML = time_to_study;
-    disable_Timer(true);
-    setTime();
+    currently_on_break = false; //this should be initially false for a pomodoro.
+    number_of_pomodoros = 0; //set it back to zero
 
+    time_of_study = time_to_study;
     currently_pomodoro = true;
     pomodoro_value = pomodoro_type;
+    time_of_break = time_to_break;
+
+    setPomodoroTime();
 }
 
+function setPomodoroTime(){
+    //if not currently on break, set the minutes value to the study time.
+    if(!currently_on_break){
+        number_of_pomodoros++;
+        pomodoroTime(time_of_study);
+    }
+    else{
+        if(number_of_pomodoros % 4 == 0 && pomodoro_value == 1){ //every four pomodoros, do a big break;
+            pomodoroTime(time_of_break * 2);
+        }
+        else if(number_of_pomodoros % 2 == 0 && pomodoro_value == 2){//for long study sessions, big break every two
+            pomodoroTime(time_of_break * 2);
+        }
+        else{
+            pomodoroTime(time_of_break);
+        }
+    }
+    //alternate it; the next time should be a break.
+    currently_on_break = !currently_on_break;
+}
+
+function pomodoroTime(time_to_use){
+    minutes.value = time_to_use;
+    disable_Timer(true);
+    setTime();
+    startTimer();
+}  
+
 function setTime(){
-    hours.value -= 0; minutes.value -=0; seconds.value -=0;    
+    hours.value -= 0; minutes.value -= 0; seconds.value -= 0; //removes leading zeros
     displayTime(hours.value, minutes.value, seconds.value);
     curr_time_seconds = (hours.value * 3600) + minutes.value * 60 + seconds.value * 1;
     last_time_started = curr_time_seconds;
@@ -78,13 +119,15 @@ function disable_Timer(b){
 function timerEnded(){
     if(last_time_started >= 300){
         setTracker();
-        study_time_tracker.push([new Date(), last_time_started]);
+        if((!currently_on_break && !currently_pomodoro) || (currently_on_break && currently_pomodoro)){
+            study_time_tracker.push([new Date(), last_time_started]);
+        }
         localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
     }
     stopTimer();
     alert("Congratulations!");
     if(currently_pomodoro){
-        //get time to break and set the timer again, we should instantly start it as well
+        setPomodoroTime();
     }
 }
 
@@ -111,7 +154,9 @@ function startTimer(){
 function stopTimer(){
     if(timerStarted){
         timerStarted = false;
-        disable_Timer(false);
+        if(!currently_pomodoro){
+            disable_Timer(false);
+        }
         clearInterval(interval);
     }
     else{
@@ -125,10 +170,13 @@ function resetTimer(){
         alert("Stop the timer first!");
     }
     else{
+        //tracks the time that they studied for if it was >= 300 seconds (5 minutes)
         var v = last_time_started - curr_time_seconds;
         if(v >= 300){
             setTracker();
-            study_time_tracker.push([new Date(), v]);
+            if((!currently_on_break && !currently_pomodoro) || (currently_on_break && currently_pomodoro)){
+                study_time_tracker.push([new Date(), v]);
+            }
             localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
         }
         curr_time_seconds = last_time_started;
