@@ -3,10 +3,13 @@
   <head>
     <title>Math Club</title>
     <link rel="stylesheet" href="../style/styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <base target="_blank">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <base target="_blank" />
   </head>
   <body>
     <div class="big-div">
@@ -16,19 +19,21 @@
           <div
             style="justify-content: center; font-size: 16px; margin-top: 20px"
           >
+            <div>To-Do List</div>
             <div>
-              To-Do List
-            </div>
-            <div>
-                <ul id="todolist_holder">
-                </ul>
+              <ul id="todolist_holder"></ul>
             </div>
             <form target="_self" id="time_input" method="get">
               <label for="add_item">Add Item:</label>
-              <input type="text" name="add_item" id="add_item"/>
-              <input type="submit" name="submit" value="submit" onclick="addToDo();"/>
-          </form>
-        </div>
+              <input type="text" name="add_item" id="add_item" />
+              <input
+                type="submit"
+                name="submit"
+                value="submit"
+                onclick="addToDo();"
+              />
+            </form>
+          </div>
         </div>
       </div>
       <custom-footer></custom-footer>

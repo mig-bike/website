@@ -156,20 +156,34 @@
   transition-duration: 0.15s;
   cursor: pointer;
 }
-
-.flashcard_front{
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  border-bottom: solid;
-  color: black;
+.edit_deck{
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgb(240, 149, 149);
+  transition-duration: 0.15s;
+  border: none;
+  cursor: pointer;
+}
+.edit_deck:hover{
+  background-color: red;
+  color: white;
+}
+.edit_deck:active{
+  background-color: rgb(172, 2, 2);
 }
 
-.flashcard_back{
+
+.flashcard_front, .flashcard_back{
   flex: 1;
   align-items: center;
   justify-content: center;
   color: black;
+  word-break: break-all;
+  padding: 0.5em;
+}
+
+.flashcard_front{
+  border-bottom: solid;
 }
 
 .flashcard:hover{
@@ -232,4 +246,18 @@
 
 .flashcard_animated_back{
   transform: rotateY(180deg) rotateZ(180deg);
+}
+
+.traverse_deck{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.interact_deck{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }

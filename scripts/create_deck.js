@@ -119,6 +119,14 @@ function makeFlashcard(front, back){
   return flashcard;
 }
 
+function edit_deck(){
+  for(const flashcard of deck_viewer.children){
+    for(const flashcard_side of flashcard.children){
+      flashcard_side.setAttribute("contenteditable", "true");
+    }
+  }
+}
+
 //saves the deck to localstorage
 /*
 - if we already saved the deck in the session, we don't want to make a new deck, so it will just replace it
