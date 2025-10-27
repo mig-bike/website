@@ -10,14 +10,23 @@ var deck_is_viewed = false;
 
 
 //class for the deck of flashcards, it should have a name, description, and deck
+
+//also we will put some stuff into the learned / unlearned piles
 class deck_of_cards {
-  constructor(name_of_deck, description, deck){
+  constructor(name_of_deck, description, deck, learned_cards, semi_learned_cards, unlearned_cards){
     this.name_of_deck = name_of_deck;
     this.description = description;
     this.deck = deck;
+    this.learned_cards = learned_cards; // completely learned
+    this.semi_learned_cards = semi_learned_cards; // kind of learned
+    this.unlearned_cards = unlearned_cards; //not learned at all!
+  }
+
+  //cool stack overflow workaround for another constructor with only name, description, deck
+  static name_description_deck(name_of_deck, description, deck){
+    return new deck_of_cards(name_of_deck, description, deck, [], [], []);
   }
 }
-
 
 // initalizes variables
 var deck_of_decks;
@@ -56,7 +65,7 @@ function makeDeck(){
   if(current_deck == []){
     return false;
   }
-  current_deck_of_cards = new deck_of_cards(name_box.value, description_box.value, current_deck);
+  current_deck_of_cards = deck_of_cards.name_description_deck(name_box.value, description_box.value, current_deck);
   return true;
 }
 
