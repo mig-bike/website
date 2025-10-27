@@ -20,17 +20,18 @@
 .delete_button, .check_button{
   height: 100%;
   color: black;
-  visibility: hidden;
   cursor: pointer;
   background-size: cover;
   background-position: center;
 }
 
 .delete_button{
+  visibility: hidden;
   background-image: url("../images/delete.png"); 
 }
 
 .check_button{
+  visibility: visible;
   background-image: url("../images/check_blank.png");
 }
 
@@ -42,10 +43,14 @@
   color: black;
 }
 
-.todo_item:hover .delete_button{
-  visibility: visible;
+.todo_text.checked{
+  text-decoration: line-through;
 }
 
-.todo_item:hover .check_button{
+.check_button.checked{
+  background-image: url("../images/check_filled.png");
+}
+
+.todo_item:hover .delete_button{
   visibility: visible;
 }
