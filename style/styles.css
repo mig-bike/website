@@ -85,13 +85,14 @@ ul {
   flex-wrap: wrap;
   margin-left: 50px;
   margin-right: 50px;
+  gap: 25px;
 }
 .box {
   min-height: 100%;
   flex: 1;
-  max-width: 250px;
+  min-width: 600px;
   color: black;
-  padding: 1em;
+  padding: 0.5em;
   border-style: solid;
   background-color: white;
   border-color: rgb(201, 197, 197);
@@ -119,9 +120,13 @@ footer {
   margin-top: auto;
   height: 20px;
 }
+
+.go-button-link{
+  width: 100%;
+}
 .go-button {
-  width: 100px;
-  height: 30px;
+  width: 100%;
+  height: 50px;
   border: none;
   background-color: rgb(39, 245, 159);
   border-radius: 5px;

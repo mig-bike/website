@@ -16,6 +16,9 @@ index within deck for card of deck, then we can simply increment / decrement
 index and then call the function for the buttons,
 
 but also we need another storage for the don't/got it part things
+
+current_deck has three places to store it,
+
 */
 document.addEventListener("DOMContentLoaded", function(){
     render_current_deck();
