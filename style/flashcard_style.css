@@ -156,6 +156,15 @@
   transition-duration: 0.15s;
   cursor: pointer;
 }
+
+.flashcard_front > div{
+  color: black;
+}
+
+.flashcard_back > div{
+  color: black;
+}
+
 .edit_deck{
   width: 100%;
   border-radius: 5px;
