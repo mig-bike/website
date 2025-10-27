@@ -11,6 +11,10 @@ var interval;
 var last_time_started = 0;
 
 var study_time_tracker;
+var currently_pomodoro = false;
+var pomodoro_value;
+
+var number_of_pomodoros = 0;
 
 function setTracker(){
     if(localStorage.getItem("study_stats") === null){
@@ -24,6 +28,24 @@ function setTracker(){
 time_input.addEventListener('change', (e) =>{
     setTime();
 });
+
+function pomodoro1(){
+    pomodoro_set(25, 5, 1); //sets time_to_study, time_to_break, pomodoro_type respectively
+}
+
+function pomodoro2(){
+    pomodoro_set(50, 10, 2); //sets time_to_study, time_to_break, pomodoro_type respectively
+}
+
+function pomodoro_set(time_to_study, time_to_break, pomodoro_type){
+    //sets time and disables timer, waiting for user to start.
+    minutes.innerHTML = time_to_study;
+    disable_Timer(true);
+    setTime();
+
+    currently_pomodoro = true;
+    pomodoro_value = pomodoro_type;
+}
 
 function setTime(){
     hours.value -= 0; minutes.value -=0; seconds.value -=0;    
@@ -61,6 +83,9 @@ function timerEnded(){
     }
     stopTimer();
     alert("Congratulations!");
+    if(currently_pomodoro){
+        //get time to break and set the timer again, we should instantly start it as well
+    }
 }
 
 

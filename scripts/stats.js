@@ -76,8 +76,12 @@ function findVariables() {
   let millis_since_epoch = Date.now();
   let days_since_epoch = Math.floor(millis_since_epoch / (1000 * 60 * 60 * 24));
 
-  time_today = day_to_studyTime.get(days_since_epoch);
-
+  if(day_to_studyTime.get(days_since_epoch) != undefined){
+    time_today = day_to_studyTime.get(days_since_epoch);
+  }
+  else{
+    time_today = 0;
+  }
 
   //study streak
   let current_day = days_since_epoch;
@@ -102,8 +106,9 @@ function findVariables() {
   let day_of_week = day_today.getDay();
 
   for (var i = 0; i <= day_of_week; i++) {
-    if (day_to_studyTime.get(days_since_epoch - i) != undefined)
+    if (day_to_studyTime.get(days_since_epoch - i) != undefined){
       time_this_week += day_to_studyTime.get(days_since_epoch - i);
+    }
   }
 }
 
@@ -111,15 +116,15 @@ function findVariables() {
 // gets the html elements by id to display each var
 var total_time_html = document.getElementById("total_study_time");
 var max_time_day_html = document.getElementById("most_study_time");
-var time_this_week_html = document.getElementById("daily_study_time");
-var time_today = document.getElementById("weekly_study_time");
-var streak = document.getElementById("study_streak");
+var time_this_week_html = document.getElementById("weekly_study_time");
+var time_today_html = document.getElementById("daily_study_time");
+var streak_html = document.getElementById("study_streak");
 
 document.addEventListener("DOMContentLoaded", function(){
   findVariables();
   total_time_html.innerHTML += total_time + "s";
   max_time_day_html.innerHTML += max_time_day + "s";
   time_this_week_html.innerHTML += time_this_week + "s";
-  time_today.innerHTML += time_today + "s";
-  streak.innerHTML = streak;
+  time_today_html.innerHTML += time_today + "s";
+  streak_html.innerHTML += streak != 1 ? streak + " days": streak + " day";
 }); 
