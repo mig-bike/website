@@ -5,7 +5,11 @@
 - Find way to review stuff that wasn't learned (store into unlearned / learned piles in flashcards)
 - Do research on this kind of stuff
 - Write stats file for it (tbh it might look better if timer / flashcard / todo stats can be in the same page)
-- we need to be able to edit the deck
+- we need to be able to edit the deck (okay done)
+- add variables in local storage for "current deck" and stuff like that
+- load on entry!
+
+
 
 2. Write CSS 
 - Make stuff look better

@@ -36,15 +36,42 @@ var current_deck_of_cards = new deck_of_cards();
 var current_deck = [];
 
 //sets deck of decks to value if it can get it from local storage
-if(localStorage.getItem("deck_of_decks") === null){
-  deck_of_decks = [];
-}
-else{
-  deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
-}
+document.addEventListener("DOMContentLoaded", function(){
+  if(localStorage.getItem("edit_mode") != "true"){
+    
+  }
+  else{
+    let currently_editing_index = localStorage.getItem("last_deck_clicked");
+    sessionStorage.setItem("current_deck_index", currently_editing_index);
+    localStorage.setItem("edit_mode", "false");
+  }
+  //sets deck of decks to value if it can get it from local storage
+  if(localStorage.getItem("deck_of_decks") === null){
+    deck_of_decks = [];
+  }
+  else{
+    deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
+  }
+
+  //checks to see if session storage has something in it right now (is this the same deck?)
+
+  if(sessionStorage.getItem("current_deck_index") === null){
+
+  }
+  else{
+    var current_deck_index = JSON.parse(sessionStorage.getItem("current_deck_index"));
+    current_deck_of_cards = deck_of_decks[current_deck_index];
+    current_deck = current_deck_of_cards.deck;
+    name_box.value = current_deck_of_cards.name_of_deck;
+    description_box.value = current_deck_of_cards.description;
+    render_cards();
+  }
+});
 
 //adds a card based on front and back input
 function add_card(){
+  save_current_cards();
+
   let front = front_of_card.value;
   let back = back_of_card.value;
 
@@ -67,6 +94,14 @@ function makeDeck(){
   }
   //saves all the edits made to the deck
   console.log("got it");
+
+  save_current_cards();
+  
+  current_deck_of_cards = deck_of_cards.name_description_deck(name_box.value, description_box.value, current_deck);
+  return true;
+}
+
+function save_current_cards(){
   let array_of_flashcards = deck_viewer.children;
   for(var i = 0; i < current_deck.length; i++){
     let ith_flashcard = array_of_flashcards[i];
@@ -75,8 +110,6 @@ function makeDeck(){
     current_deck[i][0] = front_of_ith_flashcard;
     current_deck[i][1] = back_of_ith_flashcard; //updates values for current deck
   }
-  current_deck_of_cards = deck_of_cards.name_description_deck(name_box.value, description_box.value, current_deck);
-  return true;
 }
 
 
@@ -153,9 +186,9 @@ function edit_deck(){
 user must make a new session to make a new deck
 */
 function save_deck(){
-  if(sessionStorage.getItem("already_saved") != null){ //we will check if they already saved a deck, which means we shouldn't push it again
+  if(sessionStorage.getItem("current_deck_index") != null){ //we will check if they already saved a deck, which means we shouldn't push it again
     if(makeDeck() === true){
-      deck_of_decks[JSON.parse(sessionStorage.getItem("already_saved"))] = current_deck_of_cards;
+      deck_of_decks[JSON.parse(sessionStorage.getItem("current_deck_index"))] = current_deck_of_cards;
       localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
     }
     else{
@@ -168,7 +201,7 @@ function save_deck(){
     if(makeDeck() === true){    
       deck_of_decks.push(current_deck_of_cards);
       localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
-      sessionStorage.setItem("already_saved", JSON.stringify(deck_of_decks.length - 1));
+      sessionStorage.setItem("current_deck_index", JSON.stringify(deck_of_decks.length - 1));
       /*
       above code can be buggy if we are debugging and we clear our local storage but somehow
       the session storage doesn't clear... so fix that

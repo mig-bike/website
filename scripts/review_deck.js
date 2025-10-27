@@ -23,6 +23,10 @@ document.addEventListener("DOMContentLoaded", function(){
     name_elt.innerHTML = "currently reviewing: " + current_deck.name_of_deck;
 }); 
 
+function edit_mode(){
+    localStorage.setItem("edit_mode", "true");
+}
+
 function back(){
     current_index--;
     render_current_deck();
