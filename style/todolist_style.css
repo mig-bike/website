@@ -17,11 +17,21 @@
   transition-duration: 0.1s;
 }
 
-.delete_button, .edit_button{
+.delete_button, .check_button{
   height: 100%;
   color: black;
   visibility: hidden;
   cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+
+.delete_button{
+  background-image: url("../images/delete.png"); 
+}
+
+.check_button{
+  background-image: url("../images/check_blank.png");
 }
 
 .todo_text{
@@ -36,6 +46,6 @@
   visibility: visible;
 }
 
-.todo_item:hover .edit_button{
+.todo_item:hover .check_button{
   visibility: visible;
 }

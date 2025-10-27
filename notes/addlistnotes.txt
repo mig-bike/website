@@ -13,3 +13,17 @@ if we have a ul element, we should be able to just append li elements but
 and as long as we do textContent, we should be good?
 
 // in local storage we should just have a list of these deck things
+
+- we can still use ul/li for the notes if we say list-style none,
+i don't know if div is better
+
+- use ::before pseudoclass in order to insert the checkboxes, background-size: cover, and background-position: center;
+- add position absolute to image, add position relative to the to-do list.
+
+in order to remove the element, we can do 
+
+function(e){
+    e.target.parentElement.remove();
+}
+
+we should also try this with the flashcards
