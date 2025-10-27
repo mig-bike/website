@@ -8,8 +8,7 @@
 - we need to be able to edit the deck (okay done)
 - add variables in local storage for "current deck" and stuff like that
 - load on entry!
-
-
+- fix bug with deleting event listeners in delete button thing, for now work on the other stuff
 
 2. Write CSS 
 - Make stuff look better

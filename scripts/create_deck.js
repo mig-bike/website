@@ -10,12 +10,18 @@ var deck_is_viewed = false;
 
 var currently_editing = false;
 
-
 //class for the deck of flashcards, it should have a name, description, and deck
 
 //also we will put some stuff into the learned / unlearned piles
 class deck_of_cards {
-  constructor(name_of_deck, description, deck, learned_cards, semi_learned_cards, unlearned_cards){
+  constructor(
+    name_of_deck,
+    description,
+    deck,
+    learned_cards,
+    semi_learned_cards,
+    unlearned_cards
+  ) {
     this.name_of_deck = name_of_deck;
     this.description = description;
     this.deck = deck;
@@ -25,7 +31,7 @@ class deck_of_cards {
   }
 
   //cool stack overflow workaround for another constructor with only name, description, deck
-  static name_description_deck(name_of_deck, description, deck){
+  static name_description_deck(name_of_deck, description, deck) {
     return new deck_of_cards(name_of_deck, description, deck, [], [], []);
   }
 }
@@ -34,32 +40,32 @@ class deck_of_cards {
 var deck_of_decks;
 var current_deck_of_cards = new deck_of_cards();
 var current_deck = [];
+var delete_mode;
 
 //sets deck of decks to value if it can get it from local storage
-document.addEventListener("DOMContentLoaded", function(){
-  if(localStorage.getItem("edit_mode") != "true"){
-    
-  }
-  else{
+document.addEventListener("DOMContentLoaded", function () {
+  delete_mode = false;
+
+  if (localStorage.getItem("edit_mode") != "true") {
+  } else {
     let currently_editing_index = localStorage.getItem("last_deck_clicked");
     sessionStorage.setItem("current_deck_index", currently_editing_index);
     localStorage.setItem("edit_mode", "false");
   }
   //sets deck of decks to value if it can get it from local storage
-  if(localStorage.getItem("deck_of_decks") === null){
+  if (localStorage.getItem("deck_of_decks") === null) {
     deck_of_decks = [];
-  }
-  else{
+  } else {
     deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
   }
 
   //checks to see if session storage has something in it right now (is this the same deck?)
 
-  if(sessionStorage.getItem("current_deck_index") === null){
-
-  }
-  else{
-    var current_deck_index = JSON.parse(sessionStorage.getItem("current_deck_index"));
+  if (sessionStorage.getItem("current_deck_index") === null) {
+  } else {
+    var current_deck_index = JSON.parse(
+      sessionStorage.getItem("current_deck_index")
+    );
     current_deck_of_cards = deck_of_decks[current_deck_index];
     current_deck = current_deck_of_cards.deck;
     name_box.value = current_deck_of_cards.name_of_deck;
@@ -69,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 //adds a card based on front and back input
-function add_card(){
+function add_card() {
   save_current_cards();
 
   let front = front_of_card.value;
@@ -77,33 +83,37 @@ function add_card(){
 
   let card = [front, back];
   current_deck.push(card);
-//previously we had if the deck is viewed render cards, but i don't know if it was necessary.
+  //previously we had if the deck is viewed render cards, but i don't know if it was necessary.
   render_cards();
 }
 
 //makes a deck based on the current values (must be filled out), returns false early if not
-function makeDeck(){
-  if(name_box.value == ""){
+function makeDeck() {
+  if (name_box.value == "") {
     return false;
   }
-  if(description_box.value == ""){
+  if (description_box.value == "") {
     return false;
   }
-  if(current_deck == []){
+  if (current_deck == []) {
     return false;
   }
   //saves all the edits made to the deck
   console.log("got it");
 
   save_current_cards();
-  
-  current_deck_of_cards = deck_of_cards.name_description_deck(name_box.value, description_box.value, current_deck);
+
+  current_deck_of_cards = deck_of_cards.name_description_deck(
+    name_box.value,
+    description_box.value,
+    current_deck
+  );
   return true;
 }
 
-function save_current_cards(){
+function save_current_cards() {
   let array_of_flashcards = deck_viewer.children;
-  for(var i = 0; i < current_deck.length; i++){
+  for (var i = 0; i < current_deck.length; i++) {
     let ith_flashcard = array_of_flashcards[i];
     let front_of_ith_flashcard = ith_flashcard.children[0].innerHTML;
     let back_of_ith_flashcard = ith_flashcard.children[1].innerHTML;
@@ -111,7 +121,6 @@ function save_current_cards(){
     current_deck[i][1] = back_of_ith_flashcard; //updates values for current deck
   }
 }
-
 
 //toggles card viewing
 /*
@@ -131,27 +140,74 @@ function view_cards(){
 }
   */
 
-//renders cards
-function render_cards(){
-  deck_viewer.innerHTML = "";
-    for(var i = 0; i < current_deck.length; i++){
-      let flashcard = makeFlashcard(current_deck[i][0], current_deck[i][1]);
-      deck_viewer.appendChild(flashcard);
+function delete_cards() {
+  let array_of_flashcards = deck_viewer.children;
+
+  if (delete_mode === true) {
+    for (var i = 0; i < current_deck.length; i++) {
+      let ith_flashcard = array_of_flashcards[i];
+      let actual_card = current_deck[i]; //this stores the actual card content, not the HTML of it
+
+      //the below removes event listeners to delete itself
+      console.log("event listener removed");
+      ith_flashcard.removeEventListener("click", function () {
+        console.log("hello");
+        delete_self(actual_card);
+      }, false);
+
+      ith_flashcard.classList.toggle("delete_card_background");
     }
+  } else {
+    for (var i = 0; i < current_deck.length; i++) {
+      let ith_flashcard = array_of_flashcards[i];
+      let actual_card = current_deck[i]; //this stores the actual card content, not the HTML of it
+
+      //the below adds event listeners to delete itself
+      console.log("event listener added");
+      ith_flashcard.addEventListener("click", function () {
+        console.log("hello");
+        delete_self(actual_card);
+      }, false);
+      ith_flashcard.classList.toggle("delete_card_background");
+    }
+  }
+  
+  delete_mode = !delete_mode;
 }
 
-function unrender_cards(){
+//deletes cards
+//as a result, we must prevent duplicate cards!
+function delete_self(card_to_delete) {
+  console.log("trying to delete" + card_to_delete);
+  let index_within_current_deck = current_deck.indexOf(card_to_delete);
+  current_deck.splice(index_within_current_deck, 1);
+  render_cards();
+}
+
+//renders cards
+function render_cards() {
+  deck_viewer.innerHTML = "";
+  for (var i = 0; i < current_deck.length; i++) {
+    let flashcard = makeFlashcard(current_deck[i][0], current_deck[i][1]);
+    deck_viewer.appendChild(flashcard);
+  }
+}
+
+function unrender_cards() {
   deck_viewer.innerHTML = "";
 }
 
 //representation of each flashcard in dom
-function makeFlashcard(front, back){
+function makeFlashcard(front, back) {
   let flashcard = document.createElement("div");
   flashcard.className = "flashcard";
+  if(delete_mode === true){
+    flashcard.classList.toggle("delete_card_background");
+  }
 
   let flashcard_front = document.createElement("div");
   let flashcard_back = document.createElement("div");
-  
+
   flashcard_front.className = "flashcard_front";
   flashcard_back.className = "flashcard_back";
 
@@ -164,13 +220,12 @@ function makeFlashcard(front, back){
   return flashcard;
 }
 
-function edit_deck(){
-  for(const flashcard of deck_viewer.children){
-    for(const flashcard_side of flashcard.children){
-      if(currently_editing){
+function edit_deck() {
+  for (const flashcard of deck_viewer.children) {
+    for (const flashcard_side of flashcard.children) {
+      if (currently_editing) {
         flashcard_side.setAttribute("contenteditable", "false");
-      }
-      else{
+      } else {
         flashcard_side.setAttribute("contenteditable", "true");
       }
     }
@@ -185,30 +240,36 @@ function edit_deck(){
 
 user must make a new session to make a new deck
 */
-function save_deck(){
-  if(sessionStorage.getItem("current_deck_index") != null){ //we will check if they already saved a deck, which means we shouldn't push it again
-    if(makeDeck() === true){
-      deck_of_decks[JSON.parse(sessionStorage.getItem("current_deck_index"))] = current_deck_of_cards;
+function save_deck() {
+  if (sessionStorage.getItem("current_deck_index") != null) {
+    //we will check if they already saved a deck, which means we shouldn't push it again
+    if (makeDeck() === true) {
+      deck_of_decks[JSON.parse(sessionStorage.getItem("current_deck_index"))] =
+        current_deck_of_cards;
       localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
-    }
-    else{
-      alert("Make sure the name, description, and at least one card is filled out!");
+    } else {
+      alert(
+        "Make sure the name, description, and at least one card is filled out!"
+      );
     }
     //the above should make it so that the deck of decks will replace our old (current) deck with the new stuff they put in / out
-  }
-  else{
+  } else {
     //push deck
-    if(makeDeck() === true){    
+    if (makeDeck() === true) {
       deck_of_decks.push(current_deck_of_cards);
       localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
-      sessionStorage.setItem("current_deck_index", JSON.stringify(deck_of_decks.length - 1));
+      sessionStorage.setItem(
+        "current_deck_index",
+        JSON.stringify(deck_of_decks.length - 1)
+      );
       /*
       above code can be buggy if we are debugging and we clear our local storage but somehow
       the session storage doesn't clear... so fix that
       */
-    }
-    else{
-      alert("Make sure the name, description, and at least one card is filled out!");
+    } else {
+      alert(
+        "Make sure the name, description, and at least one card is filled out!"
+      );
     }
   }
 }

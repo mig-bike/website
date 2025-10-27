@@ -270,3 +270,8 @@
   justify-content: center;
   gap: 5px;
 }
+
+.flashcard.delete_card_background{
+  background-color: rgb(226, 40, 40);
+  box-shadow: 7px 7px 5px rgb(238, 115, 115);
+}
