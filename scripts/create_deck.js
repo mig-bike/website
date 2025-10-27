@@ -95,7 +95,7 @@ function makeDeck() {
   if (description_box.value == "") {
     return false;
   }
-  if (current_deck == []) {
+  if (current_deck.length == 0) {
     return false;
   }
   //saves all the edits made to the deck
