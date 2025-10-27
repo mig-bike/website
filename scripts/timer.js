@@ -39,6 +39,16 @@ time_input.addEventListener('change', (e) =>{
     setTime();
 });
 
+function disable_pomodoro(){
+    currently_pomodoro = false;
+    currently_on_break = false;
+
+    number_of_pomodoros = 0;
+    if(!timerStarted){
+        disable_Timer(false);
+    }
+}
+
 function pomodoro1(){
     pomodoro_set(25, 5, 1); //sets time_to_study, time_to_break, pomodoro_type respectively
 }

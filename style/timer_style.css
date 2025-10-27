@@ -83,11 +83,11 @@
   margin: auto;
   margin-top: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
 
-.pomodoro_button{
+.pomodoro_button, .disable_pomodoro{
   width: 100%;
   height: 100%;
   background-color: rgb(245, 58, 58);
@@ -103,4 +103,15 @@
 
 .pomodoro_button:active{
   background-color: rgb(151, 14, 14);
+}
+
+.disable_pomodoro{
+  background-color: rgb(35, 101, 35);
+}
+.disable_pomodoro:hover{
+  background-color: rgb(106, 227, 106);
+  color: black;
+}
+.disable_pomodoro:active{
+  background-color: rgb(175, 255, 191); 
 }
