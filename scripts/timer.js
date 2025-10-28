@@ -54,7 +54,8 @@ function pomodoro1(){
 }
 
 function pomodoro2(){
-    pomodoro_set(50, 10, 2); //sets time_to_study, time_to_break, pomodoro_type respectively
+    pomodoro_set(12, 3, 0); //sets time_to_study, time_to_break, pomodoro_type respectively
+    //0 pomodoro type indicates there is no 'big break'.
 }
 
 function pomodoro_set(time_to_study, time_to_break, pomodoro_type){

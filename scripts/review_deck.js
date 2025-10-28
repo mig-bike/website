@@ -33,8 +33,13 @@ function edit_mode(){
 }
 
 function back(){
-    current_index--;
+    if(current_index != 0){
+        current_index--;
     render_current_deck();
+    }
+    else{
+        alert("You are on the first card!");
+    }
 }
 
 function advance_deck(){
@@ -55,8 +60,9 @@ function got_it(){
 }
 
 function render_current_deck(){
-    if(current_index >= current_deck.deck.length || current_index < 0){
+    if(current_index >= current_deck.deck.length){
         current_index = (current_index + current_deck.deck.length) % current_deck.deck.length;
+        alert("Congratulations! You have finished reviewing this deck!")
     }
     
     let deck_holder = document.getElementById("current_deck");
