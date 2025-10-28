@@ -15,7 +15,7 @@
 - Find a cooler font and make it look minimalistic
 - Maybe ditch some of the images?
 
-3. Finish todo list
+3. Finish todo list (DONE)
 - Finish CSS for it, be able to cross out onclick of buttons
 
 4. Write stats for timer / flashcards / todo

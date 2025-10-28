@@ -275,3 +275,35 @@
   background-color: rgb(226, 40, 40);
   box-shadow: 7px 7px 5px rgb(238, 115, 115);
 }
+
+.options_holder{
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  min-width: 500px;
+  align-items: center;
+  justify-content: center;
+}
+
+.instructions{
+  flex: 1;
+}
+
+.type_of_test_holder{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  gap: 25px;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.type_of_test{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Deck Review</title>
+    <link rel="stylesheet" href="../style/styles.css" />
+    <link rel="stylesheet" href="../style/flashcard_style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <base target="_blank" />
+  </head>
+  <body>
+    <div class="big-div">
+      <custom-header></custom-header>
+      <div class="website">
+        <div class="content">
+          <div class="options_holder" id="options_holder">
+            <div class="instructions">Select your settings for the test!</div>
+            <div class="type_of_test_holder">
+              <div class="type_of_test">
+                <input type="checkbox" id="mcq" />
+                <div class="label_for_check">Multiple Choice</div>
+              </div>
+              <div class="type_of_test">
+                <input type="checkbox" id="frq"/>
+                <div class="label_for_check">Free Response</div>
+              </div>
+            </div>
+            <div class="type_of_test_holder">
+              <div class="type_of_test">
+                <input type="checkbox" id="learned" />
+                <div class="label_for_check">Unlearned only</div>
+              </div>
+              <div class="type_of_test">
+                <input type="checkbox" id="all"/>
+                <div class="label_for_check">All flashcards</div>
+              </div>
+            </div>
+            <button class="Go!" onclick="make_test()">
+            Generate Test!
+          </button>
+          </div>
+        </div>
+      </div>
+      <custom-footer></custom-footer>
+    </div>
+    <script src="../scripts/custom_html.js"></script>
+    <script src="../scripts/test_deck.js"></script>
+  </body>
+</html>

@@ -5,6 +5,7 @@ var current_deck = deck_of_decks[index_of_deck];
 
 var current_index = 0;
 
+
 /*
 okay, we need to 
 1. show deck
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function edit_mode(){
     localStorage.setItem("edit_mode", "true");
+    localStorage.setItem("last_deck_clicked", JSON.stringify(index_of_deck));
 }
 
 function back(){
@@ -40,11 +42,11 @@ function advance_deck(){
     render_current_deck();
 }
 
-function dont_got_it(){
-    advance_deck();
+function test_mode(){
+   localStorage.setItem("last_deck_clicked", JSON.stringify(index_of_deck));
 }
 
-function kinda_got_it(){
+function dont_got_it(){
     advance_deck();
 }
 
