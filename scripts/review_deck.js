@@ -47,21 +47,41 @@ function advance_deck(){
     render_current_deck();
 }
 
+function unlearn_current_card(){
+    let current_learning_value = current_deck.deck[current_index][2];
+    if(current_learning_value != '0'){
+        current_deck.deck[current_index][2] = (--current_deck.deck[current_index][2]).toString();
+    }
+}
+function learn_current_card(){
+    let current_learning_value = current_deck.deck[current_index][2];
+    if(current_learning_value != '2'){
+        current_deck.deck[current_index][2] = (++current_deck.deck[current_index][2]).toString();
+    }
+}
+
 function test_mode(){
    localStorage.setItem("last_deck_clicked", JSON.stringify(index_of_deck));
 }
 
 function dont_got_it(){
+    unlearn_current_card();
     advance_deck();
 }
 
 function got_it(){
+    learn_current_card();
     advance_deck();
+}
+
+function finished_reviewing_deck(){
+    current_deck.last_time_studied = new Date();
 }
 
 function render_current_deck(){
     if(current_index >= current_deck.deck.length){
         current_index = (current_index + current_deck.deck.length) % current_deck.deck.length;
+        finished_reviewing_deck();
         alert("Congratulations! You have finished reviewing this deck!")
     }
     

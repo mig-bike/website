@@ -17,11 +17,13 @@ class deck_of_cards {
   constructor(
     name_of_deck,
     description,
-    deck
+    deck,
+    last_time_studied
   ) {
     this.name_of_deck = name_of_deck;
     this.description = description;
     this.deck = deck;
+    this.last_time_studied = last_time_studied;
   }
 }
 
@@ -30,6 +32,8 @@ var deck_of_decks;
 var current_deck_of_cards = new deck_of_cards();
 var current_deck = [];
 var delete_mode;
+
+var loaded_deck = false;
 
 //sets deck of decks to value if it can get it from local storage
 document.addEventListener("DOMContentLoaded", function () {
@@ -55,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var current_deck_index = JSON.parse(
       sessionStorage.getItem("current_deck_index")
     );
+    loaded_deck = true;
     current_deck_of_cards = deck_of_decks[current_deck_index];
     current_deck = current_deck_of_cards.deck;
     name_box.value = current_deck_of_cards.name_of_deck;
@@ -76,6 +81,15 @@ function add_card() {
   render_cards();
 }
 
+function getDateOfCards(){
+  if(loaded_deck){
+    return current_deck_of_cards.last_time_studied;
+  }
+  else{
+    return "unstudied";
+  }
+}
+
 //makes a deck based on the current values (must be filled out), returns false early if not
 function makeDeck() {
   if (name_box.value == "") {
@@ -95,7 +109,8 @@ function makeDeck() {
   current_deck_of_cards = new deck_of_cards(
     name_box.value,
     description_box.value,
-    current_deck
+    current_deck,
+    getDateOfCards()
   );
   return true;
 }
