@@ -1,6 +1,7 @@
 var mcq_button = document.getElementById("mcq");
 var frq_button = document.getElementById("frq");
 var unlearned_button = document.getElementById("learned");
+var partial_button = document.getElementById("partial");
 var all_flashcards_button = document.getElementById("all");
 var options_holder = document.getElementById("options_holder");
 var test_holder = document.getElementById("test_holder");
@@ -17,6 +18,9 @@ var reviewed = false;
 
 var submitted = false;
 
+var indices_unlearned = [];
+var unlearned_cards = [];
+
 function make_test() {
   if (checkInputs()) {
     findModes();
@@ -28,6 +32,30 @@ function make_test() {
 }
 
 function createTest() {
+  if(current_modes[1] == "unlearned"){ //the current mode is unlearned ONLY!
+    for(var i = 0; i < current_deck.length; i++){
+      if(current_deck[i][2] == 0){
+        indices_unlearned.push(i);
+        unlearned_cards.push(current_deck[i]);
+      }
+    }
+    current_deck = unlearned_cards; //we will review only the completely unlearned cards
+    if(unlearned_cards.length == 0){
+      alert("There are no unlearned cards!");
+    }
+  }
+  else if(current_modes[1] == "partial"){
+    for(var i = 0; i < current_deck.length; i++){
+      if(current_deck[i][2] == 0 || current_deck[i][2] == 1){ //we review unlearned / partially learned cards
+        indices_unlearned.push(i); 
+        unlearned_cards.push(current_deck[i]);
+      }
+    }
+    current_deck = unlearned_cards; //we will operate only on the completely unlearned cards
+    if(unlearned_cards.length == 0){
+      alert("There are no unlearned cards!");
+    }
+  }
   for (var i = 0; i < current_deck.length; i++) {
     let test_question = createTestQuestion(i);
     test_holder.appendChild(test_question);
@@ -77,7 +105,10 @@ function findModes() {
 
   if (unlearned_button.checked) {
     current_modes.push("unlearned");
-  } else {
+  } else if(partial_button.checked){
+    current_modes.push("partial");
+  }
+  else {
     current_modes.push("learned");
   }
 }
@@ -109,7 +140,9 @@ function finish_test() {
   } 
   else if(!reviewed){
     review_test();
-    alert("Values updated!");
+    if(reviewed){
+      alert("Values updated!");
+    }
   }
   else {
     alert("Values are already updated!");
@@ -120,24 +153,45 @@ function review_test(){
   if(valid_submit_inputs()){
     let correct_answers = document.querySelectorAll(".correct_button");
 
-    for(var i = 0; i < correct_answers.length; i++){
-      if(correct_answers[i].checked){ //if they have a correct answer
-        if(current_deck[i][2] == '0' || current_deck[i][2] == '1'){
-          current_deck[i][2]++; //learned value increase
+    if(current_modes[1] == "learned"){
+      for(var i = 0; i < correct_answers.length; i++){
+        if(correct_answers[i].checked){ //if they have a correct answer
+          if(current_deck[i][2] == '0' || current_deck[i][2] == '1'){
+            current_deck[i][2] = (++current_deck[i][2]).toString(); //learned value increase
+          }
+        }
+        else{ //they must have an incorrect answer
+          if(current_deck[i][2] == '1' || current_deck[i][2] == '2'){
+            current_deck[i][2] = (--current_deck[i][2]).toString(); //learned value decrease
+          }
         }
       }
-      else{ //they must have an incorrect answer
-        if(current_deck[i][2] == '1' || current_deck[i][2] == '2'){
-          current_deck[i][2]--; //learned value decrease
-        }
-      }
+      current_deck_of_cards.deck = current_deck;
+      deck_of_decks[current_index_of_deck] = current_deck_of_cards;
+
+      localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
+
+      reviewed = true;
     }
-    current_deck_of_cards.deck = current_deck;
-    deck_of_decks[current_index_of_deck] = current_deck_of_cards;
+    else{
+      let updated_deck = current_deck_of_cards.deck;
+      for(var i = 0; i < unlearned_cards.length; i++){
+        if(correct_answers[i].checked){
+          updated_deck[indices_unlearned[i]][2] = (++updated_deck[indices_unlearned[i]][2]).toString(); //updated_deck[indices_unlearned[i]] corresponds to the ith unlearned card
+        }//we always++ because we have an unlearned card.
+        else{
+          if(updated_deck[indices_unlearned[i]][2] == '1'){
+            updated_deck[indices_unlearned[i]][2] = (--updated_deck[indices_unlearned[i]][2]).toString();
+          }
+        }
+      }
+      current_deck_of_cards.deck = updated_deck;
+      deck_of_decks[current_index_of_deck] = current_deck_of_cards;
 
-    localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
+      localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
 
-    reviewed = true;
+      reviewed = true;
+    }
   }
   else{
     alert("Make sure that there is exactly one checkbox marked per row!");
@@ -181,18 +235,32 @@ function createButtons(index_of_card) {
 }
 
 function checkInputs() {
-  if (mcq_button.checked && frq_button.checked) {
+  let number_of_checks = 0;
+  if(mcq_button.checked){
+    number_of_checks++;
+  }
+  if(frq_button.checked){
+    number_of_checks++;
+  }
+  if(number_of_checks != 1){
     return false;
   }
-  if (!mcq_button.checked && !frq_button.checked) {
+
+  number_of_checks = 0;
+
+  if(unlearned_button.checked){
+    number_of_checks++;
+  }
+  if(partial_button.checked){
+    number_of_checks++;
+  }
+  if(all_flashcards_button.checked){
+    number_of_checks++;
+  }
+  if(number_of_checks != 1){
     return false;
   }
-  if (unlearned_button.checked && all_flashcards_button.checked) {
-    return false;
-  }
-  if (!unlearned_button.checked && !all_flashcards_button.checked) {
-    return false;
-  }
+  
 
   return true;
 }
