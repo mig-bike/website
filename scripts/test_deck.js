@@ -13,6 +13,7 @@ var current_index_of_deck = JSON.parse(
 );
 var current_deck_of_cards = deck_of_decks[current_index_of_deck];
 var current_deck = current_deck_of_cards.deck;
+var reviewed = false;
 
 var submitted = false;
 
@@ -32,7 +33,8 @@ function createTest() {
     test_holder.appendChild(test_question);
   }
   let submit_button = document.createElement("button");
-  submit_button.class = "submit_button";
+  submit_button.className = "submit_button";
+  submit_button.id = "submit_button";
   submit_button.setAttribute("onclick", "finish_test();");
   submit_button.innerHTML = "Submit!";
 
@@ -101,10 +103,59 @@ function finish_test() {
       all_test_items[i].appendChild(buttons);
     }
     checkbox_labels.classList.toggle("unhide");
+    let submit_button = document.getElementById("submit_button");
 
-  } else {
-    alert("You have already submitted the test!");
+    submit_button.innerHTML = ("Finish reviewing!"); //changes the submit button to a review button
+  } 
+  else if(!reviewed){
+    review_test();
+    alert("Values updated!");
   }
+  else {
+    alert("Values are already updated!");
+  }
+}
+
+function review_test(){
+  if(valid_submit_inputs()){
+    let correct_answers = document.querySelectorAll(".correct_button");
+
+    for(var i = 0; i < correct_answers.length; i++){
+      if(correct_answers[i].checked){ //if they have a correct answer
+        if(current_deck[i][2] == '0' || current_deck[i][2] == '1'){
+          current_deck[i][2]++; //learned value increase
+        }
+      }
+      else{ //they must have an incorrect answer
+        if(current_deck[i][2] == '1' || current_deck[i][2] == '2'){
+          current_deck[i][2]--; //learned value decrease
+        }
+      }
+    }
+    current_deck_of_cards.deck = current_deck;
+    deck_of_decks[current_index_of_deck] = current_deck_of_cards;
+
+    localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
+
+    reviewed = true;
+  }
+  else{
+    alert("Make sure that there is exactly one checkbox marked per row!");
+  }
+}
+
+function valid_submit_inputs(){
+  let correct_answers = document.querySelectorAll(".correct_button");
+  let incorrect_answers = document.querySelectorAll(".incorrect_button");
+  for(var i = 0; i < correct_answers.length; i++){
+    if(correct_answers[i].checked && incorrect_answers[i].checked){
+      return false;
+    }
+    else if((!correct_answers[i].checked) &&(!incorrect_answers[i].checked)){
+      return false;
+    }
+  }
+  return true;
 }
 
 function createButtons(index_of_card) {
