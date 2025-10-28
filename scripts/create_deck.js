@@ -17,22 +17,11 @@ class deck_of_cards {
   constructor(
     name_of_deck,
     description,
-    deck,
-    learned_cards,
-    semi_learned_cards,
-    unlearned_cards
+    deck
   ) {
     this.name_of_deck = name_of_deck;
     this.description = description;
     this.deck = deck;
-    this.learned_cards = learned_cards; // completely learned
-    this.semi_learned_cards = semi_learned_cards; // kind of learned
-    this.unlearned_cards = unlearned_cards; //not learned at all!
-  }
-
-  //cool stack overflow workaround for another constructor with only name, description, deck
-  static name_description_deck(name_of_deck, description, deck) {
-    return new deck_of_cards(name_of_deck, description, deck, [], [], []);
   }
 }
 
@@ -81,7 +70,7 @@ function add_card() {
   let front = front_of_card.value;
   let back = back_of_card.value;
 
-  let card = [front, back];
+  let card = [front, back, 0]; //the zero is to indicate that the card is completely unlearned
   current_deck.push(card);
   //previously we had if the deck is viewed render cards, but i don't know if it was necessary.
   render_cards();
@@ -103,7 +92,7 @@ function makeDeck() {
 
   save_current_cards();
 
-  current_deck_of_cards = deck_of_cards.name_description_deck(
+  current_deck_of_cards = new deck_of_cards(
     name_box.value,
     description_box.value,
     current_deck
@@ -118,7 +107,7 @@ function save_current_cards() {
     let ith_flashcard = array_of_flashcards[i];
     let front_of_ith_flashcard = ith_flashcard.children[0].innerHTML;
     let back_of_ith_flashcard = ith_flashcard.children[1].innerHTML;
-    current_deck.push([front_of_ith_flashcard, back_of_ith_flashcard]);
+    current_deck.push([front_of_ith_flashcard, back_of_ith_flashcard, ith_flashcard.id]);
   }
 }
 
@@ -169,7 +158,7 @@ function delete_cards() {
 function render_cards() {
   deck_viewer.innerHTML = "";
   for (var i = 0; i < current_deck.length; i++) {
-    let flashcard = makeFlashcard(current_deck[i][0], current_deck[i][1]);
+    let flashcard = makeFlashcard(current_deck[i][0], current_deck[i][1], current_deck[i][2]);
     deck_viewer.appendChild(flashcard);
   }
 }
@@ -179,12 +168,13 @@ function unrender_cards() {
 }
 
 //representation of each flashcard in dom
-function makeFlashcard(front, back) {
+function makeFlashcard(front, back, learned_value) {
   let flashcard = document.createElement("div");
   flashcard.className = "flashcard";
   if(delete_mode === true){
     flashcard.classList.toggle("delete_card_background");
   }
+  flashcard.id = learned_value;
 
   let flashcard_front = document.createElement("div");
   let flashcard_back = document.createElement("div");
