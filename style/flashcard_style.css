@@ -307,3 +307,40 @@
   align-items: center;
   justify-content: center;
 }
+
+.test_holder{
+  border-style: solid;
+  padding: 1em;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.test_item{
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  font-size: 16px;
+  align-items: center;
+  margin-top: 10px;
+}
+.prompt_to_test{
+  word-break: break-all;
+  flex: 3;
+}
+.text_enter_field{
+  word-break: break-all;
+  flex: 5;
+  min-height: 50px;
+}
+
+.right_wrong_holder{
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.correct_button, .incorrect_button{
+  flex: 1;
+}

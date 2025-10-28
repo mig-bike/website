@@ -175,6 +175,8 @@ function makeFlashcard(front, back, learned_value) {
     flashcard.classList.toggle("delete_card_background");
   }
   flashcard.id = learned_value;
+  //THE ID OF EACH CARD STORES THE LEARNED VALUE SO WE DONT HAVE TO MAKE THREE ARRAYS
+  //AND DO THIS!!!
 
   let flashcard_front = document.createElement("div");
   let flashcard_back = document.createElement("div");
