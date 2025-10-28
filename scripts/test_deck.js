@@ -4,6 +4,7 @@ var unlearned_button = document.getElementById("learned");
 var all_flashcards_button = document.getElementById("all");
 var options_holder = document.getElementById("options_holder");
 var test_holder = document.getElementById("test_holder");
+var checkbox_labels = document.getElementById("checkbox_label_holder");
 
 var current_modes = [];
 var deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
@@ -99,6 +100,8 @@ function finish_test() {
       let buttons = createButtons(i);
       all_test_items[i].appendChild(buttons);
     }
+    checkbox_labels.classList.toggle("unhide");
+
   } else {
     alert("You have already submitted the test!");
   }
@@ -106,13 +109,13 @@ function finish_test() {
 
 function createButtons(index_of_card) {
   let holder = document.createElement("div");
-  let button_correct = document.createElement("button");
-  let button_incorrect = document.createElement("button");
+  let button_correct = document.createElement("input");
+  let button_incorrect = document.createElement("input");
 
   holder.className = "right_wrong_holder";
 
-  button_correct.innerHTML = "Correct!";
-  button_incorrect.innerHTML = "Incorrect!";
+  button_correct.type = "checkbox";
+  button_incorrect.type = "checkbox";
 
   button_correct.className = "correct_button";
   button_incorrect.className = "incorrect_button";

@@ -315,7 +315,7 @@
   margin-right: 10px;
 }
 
-.test_item{
+.test_item, .checkbox_label_holder{
   display: flex;
   flex-direction: row;
   gap: 50px;
@@ -333,7 +333,7 @@
   min-height: 50px;
 }
 
-.right_wrong_holder{
+.right_wrong_holder, .check_text_holder{
   flex: 3;
   display: flex;
   flex-direction: row;
@@ -341,6 +341,18 @@
   gap: 10px;
 }
 
-.correct_button, .incorrect_button{
+.checkbox_label_holder{
+  visibility: hidden;
+}
+
+.checkbox_label_holder.unhide{
+  visibility: visible;
+}
+
+.correct_button, .incorrect_button, .checkbox_label{
   flex: 1;
+}
+
+.placeholder{
+  flex: 8;
 }
