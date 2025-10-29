@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Import / Export</title>
+    <link rel="stylesheet" href="../style/styles.css" />
+    <link rel="stylesheet" href="../style/flashcard_style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <base target="_blank" />
+  </head>
+  <body>
+    <div class="big-div">
+      <custom-header></custom-header>
+      <div class="website">
+        <div class="content">
+          Export your data!
+          <div class="export_buttons_holder">
+            <button id="download_timer" onclick="download_timer()">Download your timer statistics!</button>
+            <button id="download_to_do_list">Download your to-do list!</button>
+            <a id="download_deck_of_decks" onclick="download_deck_of_decks()">Download all your decks! (progress saved)</a>
+            <button id="download_deck_of_decks_empty">Download all your decks! (progress deleted)</button>
+            <button id="download_select_decks">Download only some of your decks!</button>
+          </div>
+          <div class="import_buttons_holder">
+
+          </div>
+        </div>
+      </div>
+      <custom-footer></custom-footer>
+    </div>
+    <script src="../scripts/custom_html.js"></script>
+    <script src="../scripts/import_export.js"></script>
+  </body>
+</html>
