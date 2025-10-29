@@ -4,10 +4,9 @@ class customHeader extends HTMLElement{
     <nav class="header">
         <div class="welcome">Learning Tools</div>
         <div class="header-link-cont">
-          <div class="header-link"><a target="_self" href="./web.html">HOME</a></div>
-          <div class="header-link"><a>ABOUT</a></div>
-          <div class="header-link"><a>CONTACT</a></div>
-          <div class="header-link"><a target="_self" href="./import_export.html">IMPORT/EXPORT</a></div>
+          <a class="header-link" target="_self" href="./web.html">HOME</a>
+          <a class="header-link">ABOUT</a>
+          <a class="header-link" target="_self" href="./import_export.html">IMPORT/EXPORT</a>
         </div>
       </nav>
     `;
