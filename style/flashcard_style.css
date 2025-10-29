@@ -46,6 +46,14 @@
   text-decoration: none;
 }
 
+.study_reminder{
+  color: red;
+  flex: 1;
+  padding: 0.5em;
+  word-break: break-all;
+}
+
+
 .deck:hover{
   background-color: rgb(240, 240, 240);
 }

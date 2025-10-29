@@ -3,6 +3,8 @@ var decks_flashcards = document.getElementById("decks_flashcards");
 
 var all_decks;
 
+var spaced_rep_array = [0, 1, 6, 16];
+
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -45,6 +47,54 @@ function unrender_deck(){
   decks_flashcards.innerHTML = "";
 }
 
+function getStudyStr(millis){
+  console.log("hello");
+  console.log(millis);
+ var days = Math.floor(millis/(1000 * 60 * 60 * 24));
+ millis -= days * 1000 * 60 * 60 *24;
+ var hours = Math.floor(millis/(1000 * 60 * 60));
+ millis -= hours * 1000 * 60 * 60;
+ var minutes = Math.floor(millis/(1000 * 60));
+ millis -= minutes * 1000 * 60;
+ var seconds = Math.floor(millis/1000);
+
+ return "Time to next study: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+}
+
+function makeStudyReminder(index){
+  let reminder = document.createElement("div");
+
+  let current_deck_of_cards = deck_array[index];
+  console.log(current_deck_of_cards);
+  let date_of_last_study = current_deck_of_cards.last_time_studied;
+  console.log("date_of_last_study: "+ date_of_last_study);
+  let days_since_last_study = (Date.now() - date_of_last_study)/(1000 * 60 * 60 * 24); //gets number of days since
+  console.log("hello: " + days_since_last_study);
+
+  let next_review_session = 1000 * 60 * 60 * 24 * (spaced_rep_array[current_deck_of_cards.spaced_repetition_count] - days_since_last_study);
+  console.log(next_review_session);
+  
+  let studyStr;
+
+  reminder.className = "study_reminder";
+
+  if(current_deck_of_cards.spaced_repetition_count <= 3){
+    if(next_review_session < 0){
+      studyStr = "Study this deck ASAP!";
+    }
+    else{
+      studyStr = getStudyStr(next_review_session);
+    }
+  }
+  else{
+    studyStr = "You have sufficiently reviewed this deck!";
+  }
+
+  reminder.innerHTML = studyStr;
+  
+  return reminder;
+}
+
 //what each deck looks like
 function makeDeck(title, description, index){
   let deck = document.createElement("a");
@@ -61,8 +111,11 @@ function makeDeck(title, description, index){
   deck_title.innerHTML = title;
   deck_description.innerHTML = description;
 
+  let deck_time_since_reviewed = makeStudyReminder(index);
+
   deck.appendChild(deck_title);
   deck.appendChild(deck_description);
+  deck.appendChild(deck_time_since_reviewed);
 
   return deck;
 }

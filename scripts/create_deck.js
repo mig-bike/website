@@ -18,12 +18,16 @@ class deck_of_cards {
     name_of_deck,
     description,
     deck,
-    last_time_studied
+    last_time_studied,
+    studied_count,
+    spaced_repetition_count
   ) {
     this.name_of_deck = name_of_deck;
     this.description = description;
     this.deck = deck;
     this.last_time_studied = last_time_studied;
+    this.studied_count = studied_count;
+    this.spaced_repetition_count = spaced_repetition_count;
   }
 }
 
@@ -86,7 +90,25 @@ function getDateOfCards(){
     return current_deck_of_cards.last_time_studied;
   }
   else{
-    return "unstudied";
+    return 0;
+  }
+}
+
+function getTimesStudiedOfCards(){
+  if(loaded_deck){
+    return current_deck_of_cards.studied_count;
+  }
+  else{
+    return 0;
+  }
+}
+
+function getSpacedRepCount(){
+  if(loaded_deck){
+    return current_deck_of_cards.spaced_repetition_count;
+  }
+  else{
+    return 0;
   }
 }
 
@@ -110,7 +132,9 @@ function makeDeck() {
     name_box.value,
     description_box.value,
     current_deck,
-    getDateOfCards()
+    getDateOfCards(),
+    getTimesStudiedOfCards(),
+    getSpacedRepCount()
   );
   return true;
 }

@@ -66,16 +66,24 @@ function test_mode(){
 
 function dont_got_it(){
     unlearn_current_card();
+    save_deck();
     advance_deck();
 }
 
 function got_it(){
     learn_current_card();
+    save_deck();
     advance_deck();
 }
 
+function save_deck(){
+    deck_of_decks[index_of_deck] = current_deck;
+    localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
+}
+
 function finished_reviewing_deck(){
-    current_deck.last_time_studied = new Date();
+    current_deck.last_time_studied = Date.now();
+    save_deck();
 }
 
 function render_current_deck(){
