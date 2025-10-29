@@ -18,6 +18,8 @@
       <div class="website">
         <div class="content">
           <div class="create-deck-holder">
+            <div class="deck_properties">
+              <div class="deck_property">Deck Properties</div>
               <div class="inputs_for_deck">
                 <div class="input_label">Name:</div>
                 <input
@@ -34,20 +36,27 @@
                   name="description"
                 />
               </div>
-              <div>Type below to add a card:</div>
-              <form
-                target="_self"
-                method="post"
-                id="card_inputs"
-                class="card_inputs"
-              >
-                <label for="front">FRONT:</label>
-                <input type="text" name="front" id="front_of_card" />
-                <label for="back">BACK:</label>
-                <input type="text" name="back" id="back_of_cards" />
-              </form>
+            </div>
+
+            <div class="deck_properties">
+              <div class="deck_property">Add a card!</div>
+              <div class="inputs_for_deck">
+                <div class="input_label">Front:</div>
+                <input
+                  class="card-builder"
+                  type="text"
+                  id="front_of_card"
+                />
+                <div class="input_label">Back:</div>
+                <input
+                  class="card-builder"
+                  type="text"
+                  id="back_of_cards"
+                />
+              </div>
+              <button id="add_card" class="add_card_button" onclick="add_card()">ADD ABOVE CARD</button>
+            </div>
               <div class="modify_deck_buttons">
-                <button id="add_card" onclick="add_card()">ADD ABOVE CARD</button>
                 <button id="save_deck" onclick="save_deck()">SAVE DECK</button>
                 <button id="edit_deck" onclick="edit_deck()">TOGGLE EDITING</button>
                 <button id="delete_decks" onclick="delete_cards()">TOGGLE DELETE</button>
