@@ -364,3 +364,36 @@
 .placeholder{
   flex: 8;
 }
+
+.create-deck-holder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modify_deck_buttons{
+  flex: 1;
+}
+
+.inputs_for_deck{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  height: 25px;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-radius: 1;
+  padding: 1em;
+  border-radius: 5px;
+  background-color: white;
+  border-color: rgb(179, 169, 169);
+  border-width: 1px;
+}
+
+.deck-builder{
+  margin-right: 20px;
+  height: 25px;
+}

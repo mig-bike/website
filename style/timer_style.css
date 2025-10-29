@@ -1,6 +1,7 @@
 .time_display {
   font-size: 50px;
   font-weight: bold;
+  color: white;
 }
 
 .modify_timer_button {
