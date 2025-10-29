@@ -5,6 +5,8 @@ var current_deck = deck_of_decks[index_of_deck];
 
 var current_index = 0;
 
+var learning_values = new Array(current_deck.length);
+
 
 /*
 okay, we need to 
@@ -21,10 +23,11 @@ but also we need another storage for the don't/got it part things
 current_deck has three places to store it,
 
 */
+
 document.addEventListener("DOMContentLoaded", function(){
     render_current_deck();
     let name_elt = document.getElementById("name");
-    name_elt.innerHTML = "currently reviewing: " + current_deck.name_of_deck;
+    name_elt.innerHTML = "<strong> currently reviewing: " + current_deck.name_of_deck + "</strong>";
 }); 
 
 function edit_mode(){
@@ -48,16 +51,10 @@ function advance_deck(){
 }
 
 function unlearn_current_card(){
-    let current_learning_value = current_deck.deck[current_index][2];
-    if(current_learning_value != '0'){
-        current_deck.deck[current_index][2] = (--current_deck.deck[current_index][2]).toString();
-    }
+    learning_values[current_index] = -1;
 }
 function learn_current_card(){
-    let current_learning_value = current_deck.deck[current_index][2];
-    if(current_learning_value != '2'){
-        current_deck.deck[current_index][2] = (++current_deck.deck[current_index][2]).toString();
-    }
+    learning_values[current_index] = 1;
 }
 
 function test_mode(){
@@ -82,6 +79,25 @@ function save_deck(){
 }
 
 function finished_reviewing_deck(){
+    console.log("hello");
+    console.log(current_deck.deck.length);
+    for(var i = 0; i < current_deck.deck.length; i++){
+        if(learning_values[i] == 1){
+            console.log("learned card");
+            let current_learning_value = current_deck.deck[i][2];
+            if(current_learning_value != '2'){
+                current_deck.deck[i][2] = (++current_deck.deck[i][2]).toString();
+            }
+        }
+        else{
+            console.log("unlearned card");
+            let current_learning_value = current_deck.deck[i][2];
+            if(current_learning_value != '0'){
+                current_deck.deck[i][2] = (--current_deck.deck[i][2]).toString();
+            }
+        }
+    }
+
     current_deck.last_time_studied = Date.now();
     save_deck();
 }

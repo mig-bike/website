@@ -285,8 +285,8 @@
 }
 
 .flashcard.delete_card_background{
-  background-color: rgb(226, 40, 40);
-  box-shadow: 7px 7px 5px rgb(238, 115, 115);
+  background-color: rgb(255, 154, 154);
+  box-shadow: 7px 7px 5px rgb(240, 189, 189);
 }
 
 .options_holder{
@@ -429,4 +429,9 @@
 .deck-builder{
   margin-right: 20px;
   height: 25px;
+}
+
+.name{
+  background: rgb(255, 214, 214);
+  padding: 0.5em;
 }
