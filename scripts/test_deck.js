@@ -272,7 +272,6 @@ function checkInputs() {
   if(number_of_checks != 1){
     return false;
   }
-  
 
   return true;
 }

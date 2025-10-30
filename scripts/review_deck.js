@@ -16,6 +16,8 @@ var current_index = 0;
 
 var learning_values = new Array(current_deck.length);
 
+var spaced_rep_array = [0, 1, 6, 16];
+
 
 /*
 okay, we need to 
@@ -87,6 +89,23 @@ function save_deck(){
     localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
 }
 
+function getSpacedRepetition(){
+    
+}
+
+function getMinStudyLevel(){
+    let minStudyLevel = 2;
+    for(var i = 0; i < current_deck.deck.length; i++){
+        if(current_deck.deck[i][2] == '0'){
+            return 0;
+        }
+        else if(current_deck.deck[i][2] == '1'){
+            minStudyLevel = 1;
+        }
+    }
+    return minStudyLevel;
+}
+
 function finished_reviewing_deck(){
     console.log("hello");
     console.log(current_deck.deck.length);
@@ -107,7 +126,16 @@ function finished_reviewing_deck(){
         }
     }
 
+    //increment spaced repetition count if conditions are met
+    
+    if(getMinStudyLevel() >= 1){
+        if(getSpacedRepetition() == true){
+            current_deck.spaced_repetition_count++;
+        }
+    }
+
     current_deck.last_time_studied = Date.now();
+
     save_deck();
 }
 

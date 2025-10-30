@@ -14,6 +14,16 @@ var currently_editing = false;
 
 //also we will put some stuff into the learned / unlearned piles
 class deck_of_cards {
+  /*
+
+  spaced repetition count counts the number of times that we have studied when we should've
+  studied according to spaced repetition.
+
+  it should go up if both 
+  - all flashcards have learning value of 1+
+  - the current time studied is within the spaced repetition interval thing
+
+  */
   constructor(
     name_of_deck,
     description,
