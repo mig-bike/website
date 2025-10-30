@@ -167,24 +167,6 @@ function save_current_cards() {
   }
 }
 
-//toggles card viewing
-/*
-function view_cards(){
-  if(current_deck.length === 0){
-    alert("No cards to render!");
-  }
-  else{
-    if(!deck_is_viewed){
-      render_cards();
-    }
-    else{
-      unrender_cards();
-    }
-    deck_is_viewed = !deck_is_viewed;
-  }
-}
-  */
-
 function delete_a_card(e){
   if(e.target.parentElement.className === "flashcard delete_card_background"){
         e.target.parentElement.remove();
@@ -217,10 +199,6 @@ function render_cards() {
     let flashcard = makeFlashcard(current_deck[i][0], current_deck[i][1], current_deck[i][2]);
     deck_viewer.appendChild(flashcard);
   }
-}
-
-function unrender_cards() {
-  deck_viewer.innerHTML = "";
 }
 
 //representation of each flashcard in dom

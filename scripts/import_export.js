@@ -34,10 +34,6 @@ document.addEventListener("DOMContentLoaded", function(){
     initialize_select_deck();
 });
 
-function initialize_select_deck(){
-  
-}
-
 function make_empty_deck(target_dod){
   let target_deck_of_decks = target_dod; //makes copy of it
   for(var i = 0; i < target_deck_of_decks.length; i++){

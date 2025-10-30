@@ -13,7 +13,6 @@
   margin-top: 10px;
   align-items: center;
   flex: 1;
-  
 }
 
 .decks_flashcards{
@@ -381,11 +380,11 @@
   flex: 1;
 }
 
-.deck_property, .card_input_label{
+.deck_property, .card_input_label, .card_property{
   font-weight: bold;
 }
 
-.deck_properties{
+.deck_properties, .card_properties{
   border-style: solid;
   border-radius: 1;
   padding: 1em;
@@ -394,9 +393,17 @@
   border-color: rgb(179, 169, 169);
   border-width: 1px;
   display: grid;
-  grid-template-rows: 25px 25px;
   gap: 20px;
   margin-bottom: 20px;
+  width: 100%;
+  max-width: 750px;
+}
+.deck_properties{
+  grid-template-rows: 25px 25px;
+}
+
+.card_properties{
+  grid-template-rows: 25px 100px 25px;
 }
 
 .add_card_button{
@@ -416,14 +423,21 @@
   background-color: rgb(53, 56, 63);
 }
 
-.inputs_for_deck{
+.inputs_for_deck, .inputs_for_card{
   flex: 1;
   display: flex;
-  flex-direction: row;
   gap: 5px;
   height: 25px;
   align-items: center;
   justify-content: center;
+}
+
+.inputs_for_deck{
+  flex-direction: row;
+}
+
+.inputs_for_card{
+  flex-direction: column;
 }
 
 .deck-builder{
@@ -434,4 +448,39 @@
 .name{
   background: rgb(255, 214, 214);
   padding: 0.5em;
+}
+
+.modify_deck_buttons{
+  flex: 1;
+  min-width: 400px;
+  max-width: 750px;
+  width: 100%;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  min-height: 50px;
+}
+
+.save_deck, .edit_toggle, .delete_toggle{
+  border: none;
+  height: 100%;
+  transition-duration:0.15s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.save_deck{
+  background-color: #ffff97;
+}
+
+.edit_toggle{
+  background-color: rgb(196, 196, 255);
+}
+
+.delete_toggle{
+  background-color: rgb(255, 193, 193);
+}
+
+.card-builder{
+  width: 300px;
 }
