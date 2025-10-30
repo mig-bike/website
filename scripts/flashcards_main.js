@@ -73,15 +73,13 @@ function makeStudyReminder(index){
   console.log("date_of_last_study: "+ date_of_last_study);
   let days_since_last_study = (Date.now() - date_of_last_study)/(1000 * 60 * 60 * 24); //gets number of days since
   console.log("hello: " + days_since_last_study);
-
-  let next_review_session = 1000 * 60 * 60 * 24 * (spaced_rep_array[current_deck_of_cards.spaced_repetition_count] - days_since_last_study);
-  console.log(next_review_session);
   
   let studyStr;
 
   reminder.className = "study_reminder";
 
   if(current_deck_of_cards.spaced_repetition_count <= 3){
+    let next_review_session = 1000 * 60 * 60 * 24 * (spaced_rep_array[current_deck_of_cards.spaced_repetition_count] - days_since_last_study);
     if(next_review_session < 0){
       studyStr = "Study this deck ASAP!";
     }

@@ -206,11 +206,13 @@ function review_test(){
       current_deck_of_cards.deck = current_deck;
       deck_of_decks[current_index_of_deck] = current_deck_of_cards;
 
-      if(getMinStudyLevel() >= 1){
+      if(current_deck_of_cards.spaced_repetition_count < 3){
+        if(getMinStudyLevel() >= 1){
           if(getSpacedRepetition() == true){
               current_deck_of_cards.last_time_studied = Date.now();
               current_deck_of_cards.spaced_repetition_count++;
           }
+        }
       }
 
       localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
@@ -230,12 +232,13 @@ function review_test(){
       }
       current_deck_of_cards.deck = updated_deck;
       deck_of_decks[current_index_of_deck] = current_deck_of_cards;
-
-      if(getMinStudyLevel() >= 1){
+      if(current_deck_of_cards.spaced_repetition_count < 3){
+        if(getMinStudyLevel() >= 1){
           if(getSpacedRepetition() == true){
               current_deck_of_cards.last_time_studied = Date.now();
               current_deck_of_cards.spaced_repetition_count++;
           }
+        }
       }
 
       current_deck_of_cards.studied_count++;

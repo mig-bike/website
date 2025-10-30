@@ -134,11 +134,12 @@ function finished_reviewing_deck(){
     }
 
     //increment spaced repetition count if conditions are met
-    
-    if(getMinStudyLevel() >= 1){
-        if(getSpacedRepetition() == true){
-            current_deck.last_time_studied = Date.now();
-            current_deck.spaced_repetition_count++;
+    if(current_deck.spaced_repetition_count < 3){
+        if(getMinStudyLevel() >= 1){
+            if(getSpacedRepetition() == true){
+                current_deck.last_time_studied = Date.now();
+                current_deck.spaced_repetition_count++;
+            }
         }
     }
 
