@@ -12,15 +12,16 @@ var import_timer = document.getElementById("timer_stats");
 var import_todo = document.getElementById("todolist");
 
 var already_submitted = false;
+var already_created_buttons = false;
 
 //from https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
 
-var dod_empty;
 var dod; //"deck of decks"
 
 
 document.addEventListener("DOMContentLoaded", function(){
   console.log("hello");
+  var x;
     if(localStorage.getItem("deck_of_decks") === null){
       console.log("set to empty");
       dod = [];
@@ -30,10 +31,13 @@ document.addEventListener("DOMContentLoaded", function(){
       dod = [];
     }
       else{
-        console.log("set to nonempty");
-       dod = JSON.parse(localStorage.getItem("deck_of_decks"));
+      console.log("set to nonempty");
+      console.log(JSON.parse(localStorage.getItem("deck_of_decks")));
+      x = JSON.parse(localStorage.getItem("deck_of_decks"));
+      dod = JSON.parse(localStorage.getItem("deck_of_decks"));
     }
     initialize_buttons();
+    dod = x;
 });
 
 function export_select_decks(){
@@ -95,7 +99,30 @@ function create_checkbox(index){
 }
 
 function create_new_buttons(array_of_submitted){
-  
+  let deck_to_save = [];
+  console.log(dod);
+  for(var i = 0; i < array_of_submitted.length; i++){
+    deck_to_save.push(dod[array_of_submitted[i]]);
+    console.log(dod[array_of_submitted[i]]);
+  }
+  if(already_created_buttons){
+    let selected_progress = document.getElementById("selected_progress");
+    let selected_no_progress = document.getElementById("selected_no_progress");
+
+    let data_progress = "data:text/json;charset=utf-8," + JSON.stringify(deck_to_save);
+    let data_no_progress = "data:text/json;charset=utf-8," + JSON.stringify(make_empty_deck(deck_to_save));
+    selected_progress.setAttribute("href", data_progress);
+    selected_no_progress.setAttribute("href", data_no_progress);
+  }
+  else{
+    create_download_button(JSON.stringify(deck_to_save), "selected_progress", "Download selected decks! (Progress saved)");
+    create_download_button(JSON.stringify(make_empty_deck(deck_to_save)), "selected_no_progress", "Download selected decks! (Progress deleted)");
+  }
+  already_created_buttons = true;
+}
+
+function delete_data(){
+  localStorage.clear();
 }
 
 function submit_selections(){
@@ -122,14 +149,19 @@ function submit_selections(){
 }
 
 function make_empty_deck(target_dod){
+  console.log("cleared a deck");
   let target_deck_of_decks = target_dod; //makes copy of it
   for(var i = 0; i < target_deck_of_decks.length; i++){
     let target_deck = target_deck_of_decks[i];
     for(var j = 0; j < target_deck.deck.length; j++){
       target_deck.deck[j][2] = '0';
     }
+    target_deck_of_decks[i].last_time_studied = 0;
+    target_deck_of_decks[i].studied_count = 0;
+    target_deck_of_decks[i].spaced_repetition_count = 0;
     target_deck_of_decks[i] = target_deck;
   }
+
   return target_deck_of_decks;
 }
 
@@ -149,6 +181,7 @@ function create_download_button(data_to_download, name_of_download, button_name)
     let data_to_page = "data:text/json;charset=utf-8," + encodeURIComponent(data_to_download);
     link_element.setAttribute("href", data_to_page);
     link_element.setAttribute("download", name_of_download + ".json");
+    link_element.id = name_of_download;
     export_buttons_holder.appendChild(link_element);
   }
 }
