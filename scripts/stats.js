@@ -3,6 +3,9 @@ var statistics_array;
 if(localStorage.getItem("study_stats") === null){
   statistics_array = [];
 }
+else if(localStorage.getItem("study_stats").indexOf("Y29vbHZhbGlkYXRpb25zdHI=") == -1){
+  statistics_array = [];
+}
 else{
   statistics_array = JSON.parse(localStorage.getItem("study_stats"));
 }
@@ -28,7 +31,8 @@ function log_time_in_map(day_to_log, seconds_to_log) {
     day_to_studyTime.set(day_to_log, current_time_in_day + seconds_to_log);
   }
 }
-function findVariables() {
+
+function findTimerVariables() {
   let earliest_day = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); //this is by default set to today (look below)
   //ok basically what below does is it goes and fills the map
   //with what we want, days since epoch -> our stuff
@@ -112,6 +116,9 @@ function findVariables() {
   }
 }
 
+function findFlashcardVariables(){
+
+}
 
 // gets the html elements by id to display each var
 var total_time_html = document.getElementById("total_study_time");
@@ -121,10 +128,12 @@ var time_today_html = document.getElementById("daily_study_time");
 var streak_html = document.getElementById("study_streak");
 
 document.addEventListener("DOMContentLoaded", function(){
-  findVariables();
+  findTimerVariables();
   total_time_html.innerHTML += total_time + "s";
   max_time_day_html.innerHTML += max_time_day + "s";
   time_this_week_html.innerHTML += time_this_week + "s";
   time_today_html.innerHTML += time_today + "s";
   streak_html.innerHTML += streak != 1 ? streak + " days": streak + " day";
+
+
 }); 

@@ -52,7 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
   //sets deck of decks to value if it can get it from local storage
   if (localStorage.getItem("deck_of_decks") === null) {
     deck_of_decks = [];
-  } else {
+  } 
+  else if(localStorage.getItem("deck_of_decks").indexOf("\"name_of_deck\":") === -1){
+    deck_of_decks = [];
+  }
+  else {
     deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
   }
 

@@ -1,5 +1,14 @@
-var deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
+var deck_of_decks;
 
+if (localStorage.getItem("deck_of_decks") === null) {
+    deck_of_decks = [];
+  } 
+  else if(localStorage.getItem("deck_of_decks").indexOf("\"name_of_deck\":") === -1){
+    deck_of_decks = [];
+  }
+  else {
+    deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
+}
 var index_of_deck = JSON.parse(localStorage.getItem("last_deck_clicked"));
 var current_deck = deck_of_decks[index_of_deck];
 

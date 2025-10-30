@@ -3,12 +3,24 @@ var addItem = document.getElementById("add_item");
 
 var list_html;
 
+if (localStorage.getItem("list_html") === null) {
+      list_html = "";
+    } 
+    else if(localStorage.getItem("list_html").indexOf("class=\"check_button\"") == -1){
+      list_html = "";
+    }
+    else {
+      list_html = JSON.parse(localStorage.getItem("list_html"));
+    }
+
+
 function setListHtml(){
     if (localStorage.getItem("list_html") === null) {
-  list_html = "";
-} else {
-  list_html = JSON.parse(localStorage.getItem("list_html"));
-}
+      list_html = "";
+    } 
+    else {
+      list_html = JSON.parse(localStorage.getItem("list_html"));
+    }
 }
 setListHtml();
 renderList();

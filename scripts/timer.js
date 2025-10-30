@@ -30,6 +30,9 @@ function setTracker(){
     if(localStorage.getItem("study_stats") === null){
         study_time_tracker = [];
     }
+    else if(localStorage.getItem("study_stats").indexOf("Y29vbHZhbGlkYXRpb25zdHI") == -1){
+        study_time_tracker = [];
+    }
     else{
         study_time_tracker = JSON.parse(localStorage.getItem("study_stats"));
     }
@@ -131,7 +134,7 @@ function timerEnded(){
     if(last_time_started >= 300){
         setTracker();
         if((!currently_on_break && !currently_pomodoro) || (currently_on_break && currently_pomodoro)){
-            study_time_tracker.push([new Date(), last_time_started]);
+            study_time_tracker.push([new Date(), last_time_started, "Y29vbHZhbGlkYXRpb25zdHI="]);
         }
         localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
     }
@@ -186,7 +189,7 @@ function resetTimer(){
         if(v >= 300){
             setTracker();
             if((!currently_on_break && !currently_pomodoro) || (currently_on_break && currently_pomodoro)){
-                study_time_tracker.push([new Date(), v]);
+                study_time_tracker.push([new Date(), v, "Y29vbHZhbGlkYXRpb25zdHI="]);
             }
             localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
         }

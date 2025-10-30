@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", function(){
   if(localStorage.getItem("deck_of_decks") === null){
     deck_array = [];
   }
+  else if(localStorage.getItem("deck_of_decks").indexOf("\"name_of_deck\":") === -1){
+    deck_array = [];
+  }
   else{
     deck_array = JSON.parse(localStorage.getItem("deck_of_decks"));
   }
