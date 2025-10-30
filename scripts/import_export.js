@@ -3,12 +3,15 @@ var timer_stats = document.getElementById("download_timer");
 var deck_of_decks = document.getElementById("download_deck_of_decks");
 var deck_of_decks_empty = document.getElementById("download_deck_of_decks_empty");
 var select_decks = document.getElementById("export_select_decks");
+var checklist_decks_holder = document.getElementById("checklist_decks_holder");
 
 var export_buttons_holder = document.getElementById("export_buttons_holder");
 
 var import_decks = document.getElementById("decks");
 var import_timer = document.getElementById("timer_stats");
 var import_todo = document.getElementById("todolist");
+
+var already_submitted = false;
 
 //from https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
 
@@ -31,8 +34,92 @@ document.addEventListener("DOMContentLoaded", function(){
        dod = JSON.parse(localStorage.getItem("deck_of_decks"));
     }
     initialize_buttons();
-    initialize_select_deck();
 });
+
+function export_select_decks(){
+  if(dod.length > 0){
+    if(already_submitted){
+      delete_checklist();
+    }
+    else{
+      create_checklist();
+    }
+    already_submitted = !already_submitted;
+  }
+  else{
+      alert("You have no decks!");
+  }
+}
+
+function delete_checklist(){
+  checklist_decks_holder.innerHTML = '';
+}
+
+function create_checklist(){
+  let instructions = document.createElement("div");
+  instructions.innerHTML = "Select decks to export!";
+  checklist_decks_holder.appendChild(instructions);
+
+  for(var i = 0; i < dod.length; i++){
+    let deck_item = create_checkbox(i);
+    checklist_decks_holder.appendChild(deck_item);
+  }
+  let submit_button = create_submit_button();
+  checklist_decks_holder.appendChild(submit_button);
+}
+
+function create_submit_button(){
+  let submit_button = document.createElement("button");
+  submit_button.setAttribute("onclick", "submit_selections()");
+  submit_button.className = "submit_selections";
+  submit_button.innerHTML = "Submit selected decks!";
+
+  return submit_button;
+}
+
+function create_checkbox(index){
+  let checkbox_holder = document.createElement("div");
+  let checkbox = document.createElement("input");
+  checkbox.id = index;
+  checkbox.className = "input_check";
+  checkbox.type = "checkbox";
+
+  let name_deck = document.createElement("div");
+  name_deck.className = "name_deck";
+  name_deck.innerHTML = dod[index].name_of_deck;
+
+  checkbox_holder.appendChild(checkbox);
+  checkbox_holder.appendChild(name_deck);
+  
+  return checkbox_holder;
+}
+
+function create_new_buttons(array_of_submitted){
+  
+}
+
+function submit_selections(){
+  let array_of_submitted = [];
+  let checked_boxes = document.querySelectorAll(".input_check");
+
+  console.log(checked_boxes);
+  
+  for(var i = 0; i < checked_boxes.length; i++){
+    let checkbox_variable = document.getElementById(i);
+    if(checkbox_variable.checked){
+      array_of_submitted.push(i);
+    }
+  }
+
+  console.log(array_of_submitted);
+
+  if(array_of_submitted.length == 0){
+    alert("Choose at least one deck to submit!");
+  }
+  else{
+    create_new_buttons(array_of_submitted);
+  }
+}
 
 function make_empty_deck(target_dod){
   let target_deck_of_decks = target_dod; //makes copy of it
