@@ -90,7 +90,14 @@ function save_deck(){
 }
 
 function getSpacedRepetition(){
-    
+    let time_since_last_study = Date.now() - current_deck.last_time_studied;
+    time_since_last_study /= (1000 * 60 * 60 * 24); //to convert millis to days
+    let spaced_rep_threshold = spaced_rep_array[current_deck.spaced_repetition_count];
+
+    if(time_since_last_study >= spaced_rep_threshold){
+        return true;
+    }
+    return false;
 }
 
 function getMinStudyLevel(){
@@ -130,11 +137,10 @@ function finished_reviewing_deck(){
     
     if(getMinStudyLevel() >= 1){
         if(getSpacedRepetition() == true){
+            current_deck.last_time_studied = Date.now();
             current_deck.spaced_repetition_count++;
         }
     }
-
-    current_deck.last_time_studied = Date.now();
 
     save_deck();
 }

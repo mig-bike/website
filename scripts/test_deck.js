@@ -8,6 +8,7 @@ var test_holder = document.getElementById("test_holder");
 var checkbox_labels = document.getElementById("checkbox_label_holder");
 
 var current_modes = [];
+var spaced_rep_array = [0,1,6,16];
 
 var deck_of_decks;
 
@@ -125,6 +126,30 @@ function findModes() {
   }
 }
 
+function getSpacedRepetition(){
+    let time_since_last_study = Date.now() - current_deck_of_cards.last_time_studied;
+    time_since_last_study /= (1000 * 60 * 60 * 24); //to convert millis to days
+    let spaced_rep_threshold = spaced_rep_array[current_deck_of_cards.spaced_repetition_count];
+
+    if(time_since_last_study >= spaced_rep_threshold){
+        return true;
+    }
+    return false;
+}
+
+function getMinStudyLevel(){
+    let minStudyLevel = 2;
+    for(var i = 0; i < current_deck_of_cards.deck.length; i++){
+        if(current_deck_of_cards.deck[i][2] == '0'){
+            return 0;
+        }
+        else if(current_deck_of_cards.deck[i][2] == '1'){
+            minStudyLevel = 1;
+        }
+    }
+    return minStudyLevel;
+}
+
 function finish_test() {
   if (!submitted) {
     submitted = true;
@@ -181,8 +206,14 @@ function review_test(){
       current_deck_of_cards.deck = current_deck;
       deck_of_decks[current_index_of_deck] = current_deck_of_cards;
 
-      localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
+      if(getMinStudyLevel() >= 1){
+          if(getSpacedRepetition() == true){
+              current_deck_of_cards.last_time_studied = Date.now();
+              current_deck_of_cards.spaced_repetition_count++;
+          }
+      }
 
+      localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
       reviewed = true;
     }
     else{
@@ -200,8 +231,14 @@ function review_test(){
       current_deck_of_cards.deck = updated_deck;
       deck_of_decks[current_index_of_deck] = current_deck_of_cards;
 
-      localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
+      if(getMinStudyLevel() >= 1){
+          if(getSpacedRepetition() == true){
+              current_deck_of_cards.last_time_studied = Date.now();
+              current_deck_of_cards.spaced_repetition_count++;
+          }
+      }
 
+      localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
       reviewed = true;
     }
   }

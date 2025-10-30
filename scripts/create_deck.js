@@ -23,6 +23,9 @@ class deck_of_cards {
   - all flashcards have learning value of 1+
   - the current time studied is within the spaced repetition interval thing
 
+
+  last time studied actually stores the last time studied that satisfied the spaced repetition requirement; therefore, if we study two decks in quick succession,
+  it will not actually increment last time studied.
   */
   constructor(
     name_of_deck,
