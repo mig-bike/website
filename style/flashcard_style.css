@@ -384,6 +384,7 @@
   font-weight: bold;
 }
 
+
 .deck_properties, .card_properties{
   border-style: solid;
   border-radius: 1;
@@ -403,7 +404,8 @@
 }
 
 .card_properties{
-  grid-template-rows: 25px 100px 25px;
+  grid-template-rows: 25px 125px 25px;
+  align-items: center;
 }
 
 .add_card_button{
