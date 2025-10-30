@@ -238,6 +238,8 @@ function review_test(){
           }
       }
 
+      current_deck_of_cards.studied_count++;
+
       localStorage.setItem("deck_of_decks", JSON.stringify(deck_of_decks));
       reviewed = true;
     }

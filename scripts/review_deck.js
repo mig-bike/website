@@ -142,6 +142,8 @@ function finished_reviewing_deck(){
         }
     }
 
+    current_deck.studied_count++;
+
     save_deck();
 }
 

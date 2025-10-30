@@ -1,5 +1,20 @@
 var statistics_array;
 
+var deck_of_decks;
+
+//tries to pull deck of decks out of local storage
+if (localStorage.getItem("deck_of_decks") === null) {
+    deck_of_decks = [];
+  } 
+  else if(localStorage.getItem("deck_of_decks").indexOf("\"name_of_deck\":") === -1){
+    deck_of_decks = [];
+  }
+  else {
+    deck_of_decks = JSON.parse(localStorage.getItem("deck_of_decks"));
+  }
+
+//tries to pull study stats out of local storage
+
 if(localStorage.getItem("study_stats") === null){
   statistics_array = [];
 }
@@ -19,6 +34,11 @@ var max_time_day = 0;
 var time_this_week = 0;
 var time_today = 0;
 var streak = 0;
+
+var times_studied = 0;
+var flashcards_learned = 0;
+var flashcards_partial = 0;
+var total_spaced_reps = 0;
 
 var day_to_studyTime = new Map();
 
@@ -117,7 +137,19 @@ function findTimerVariables() {
 }
 
 function findFlashcardVariables(){
+  for(const flashcard_deck of deck_of_decks){
+    total_spaced_reps += flashcard_deck.spaced_repetition_count;
+    times_studied += flashcard_deck.studied_count;
 
+    for(const card of flashcard_deck.deck){
+      if(card[2] == '1'){
+        flashcards_partial++;
+      }
+      if(card[2] == '2'){
+        flashcards_learned++;
+      }
+    }
+  }
 }
 
 // gets the html elements by id to display each var
@@ -127,6 +159,11 @@ var time_this_week_html = document.getElementById("weekly_study_time");
 var time_today_html = document.getElementById("daily_study_time");
 var streak_html = document.getElementById("study_streak");
 
+var total_spaced_reps_html = document.getElementById("total_spaced_reps");
+var flashcards_learned_html = document.getElementById("flashcards_learned");
+var flashcards_partial_html = document.getElementById("flashcards_partial");
+var times_studied_html = document.getElementById("times_studied");
+
 document.addEventListener("DOMContentLoaded", function(){
   findTimerVariables();
   total_time_html.innerHTML += total_time + "s";
@@ -135,5 +172,9 @@ document.addEventListener("DOMContentLoaded", function(){
   time_today_html.innerHTML += time_today + "s";
   streak_html.innerHTML += streak != 1 ? streak + " days": streak + " day";
 
-
+  findFlashcardVariables();
+  total_spaced_reps_html.innerHTML += total_spaced_reps;
+  flashcards_learned_html.innerHTML += flashcards_learned;
+  flashcards_partial_html.innerHTML += flashcards_partial;
+  times_studied_html.innerHTML += times_studied;
 }); 
