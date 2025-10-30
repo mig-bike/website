@@ -5,10 +5,10 @@
 }
 
 .modify_timer_button {
-  color: white;
-  background-color: rgb(7, 108, 148);
-  height: 30px;
-  width: 100px;
+  color: black;
+  background-color: rgb(146, 217, 246);
+  height: 100%;
+  flex: 1;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -18,19 +18,21 @@
 }
 
 .modify_timer_button:hover {
-  background-color: rgb(0, 102, 255);
+  color: white;
+  background-color: rgb(73, 134, 225);
 }
 
 .modify_timer_button:active {
-  background-color: rgb(20, 46, 194);
+  background-color: rgb(44, 71, 228);
 }
 
 .time_input_holder {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 200px;
   justify-content: center;
   margin: auto;
+  gap: 5px;
 }
 
 .timer_holder {
@@ -53,11 +55,23 @@
   margin-top: 25px;
 }
 
+.time_input_holder{
+  
+}
+
+.timer{
+  border: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  height: 35px;
+}
+
 .timer_buttons{
   max-width: 600px;
+  height: 35px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 5px;
   align-content: center;
   width: 75%;
   margin: auto;
@@ -80,7 +94,7 @@
 .pomodoro_holder{
   width: 75%;
   max-width: 600px;
-  height: 30px;
+  height: 40px;
   margin: auto;
   margin-top: 10px;
   display: grid;
@@ -91,28 +105,37 @@
 .pomodoro_button, .disable_pomodoro{
   width: 100%;
   height: 100%;
+  cursor: pointer;
   background-color: rgb(245, 58, 58);
   color: white;
   border: none;
   border-radius: 5px;
   transition-duration: 0.15s;
 }
+.pomodoro_label{
+  background-color: white;
+  width: 75%;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 10px;
+  padding: 0.5em;
+}
 
-.pomodoro_button:hover{
+.disable_pomodoro:hover{
   background-color: rgb(212, 20, 20);
 }
 
-.pomodoro_button:active{
+.disable_pomodoro:active{
   background-color: rgb(151, 14, 14);
 }
 
-.disable_pomodoro{
+.pomodoro_button{
   background-color: rgb(35, 101, 35);
 }
-.disable_pomodoro:hover{
+.pomodoro_button:hover{
   background-color: rgb(106, 227, 106);
   color: black;
 }
-.disable_pomodoro:active{
+.pomodoro_button:active{
   background-color: rgb(175, 255, 191); 
 }

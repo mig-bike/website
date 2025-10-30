@@ -158,6 +158,8 @@ footer {
   flex: 1;
   font-weight: bold;
   font-size: 28px;
+  text-decoration: none;
+  color: black;
 }
 
 .hamburger {

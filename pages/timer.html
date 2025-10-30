@@ -19,34 +19,36 @@
           <div class="timer_holder">
             <div id="time_display" class="time_display">0:00</div>
           </div>
-          <form
-            target="_self"
-            method="post"
+          <div
             id="time_input"
             class="time_input_holder"
           >
-            <label for="time_hours" class="time_input">Hours:</label>
-            <input
-              class="timer"
-              type="number"
-              id="time_hours"
-              name="time_hours"
-            />
-            <label for="time_minutes" class="time_input">Minutes:</label>
-            <input
-              class="timer"
-              type="number"
-              id="time_minutes"
-              name="time_minutes"
-            />
-            <label for="time_seconds" class="time_input">Seconds:</label>
-            <input
-              class="timer"
-              type="number"
-              id="time_seconds"
-              name="time_seconds"
-            />
-          </form>
+            <div class="time_input">
+              <div class="time_input_label">Hours</div>
+              <input
+                class="timer"
+                type="number"
+                id="time_hours"
+              />
+            </div>
+            <div class="time_input">
+              <div class="time_input_label">Minutes</div>
+              <input
+                class="timer"
+                type="number"
+                id="time_minutes"
+              />
+            </div>
+            <div class="time_input">
+              <div class="time_input_label">Seconds</div>
+              <input
+                class="timer"
+                type="number"
+                id="time_seconds"
+              />
+            </div>
+            
+        </div>
           <div class="button_holder">
             <div class="timer_buttons">
               <input
@@ -73,6 +75,9 @@
                 class="modify_timer_button"
                 onclick="clearTimer();"
               />
+            </div>
+            <div class="pomodoro_label">
+              Pomodoro buttons!
             </div>
             <div class="pomodoro_holder">
               <button class="pomodoro_button" onclick="pomodoro1();">Pomodoro (25, 5)</button>

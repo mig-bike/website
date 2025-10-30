@@ -2,7 +2,7 @@ class customHeader extends HTMLElement{
   connectedCallback(){
     this.innerHTML = `
     <nav class="header">
-        <div class="welcome">Learning Tools</div>
+        <a href="./web.html" class="welcome">Learning Tools</a>
         <div class="header-link-cont">
           <a class="header-link" target="_self" href="./web.html">HOME</a>
           <a class="header-link" target="_self" href="./about.html">ABOUT</a>

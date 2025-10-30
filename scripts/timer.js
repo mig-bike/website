@@ -131,13 +131,11 @@ function disable_Timer(b){
 
 //tracks time if timer ends
 function timerEnded(){
-    if(last_time_started >= 300){
         setTracker();
         if((!currently_on_break && !currently_pomodoro) || (currently_on_break && currently_pomodoro)){
             study_time_tracker.push([new Date(), last_time_started, "Y29vbHZhbGlkYXRpb25zdHI="]);
         }
         localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
-    }
     stopTimer();
     alert("Congratulations!");
     if(currently_pomodoro){
@@ -184,15 +182,12 @@ function resetTimer(){
         alert("Stop the timer first!");
     }
     else{
-        //tracks the time that they studied for if it was >= 300 seconds (5 minutes)
         var v = last_time_started - curr_time_seconds;
-        if(v >= 300){
             setTracker();
             if((!currently_on_break && !currently_pomodoro) || (currently_on_break && currently_pomodoro)){
                 study_time_tracker.push([new Date(), v, "Y29vbHZhbGlkYXRpb25zdHI="]);
             }
             localStorage.setItem("study_stats", JSON.stringify(study_time_tracker));
-        }
         curr_time_seconds = last_time_started;
         displayTime_seconds(curr_time_seconds);
     }
