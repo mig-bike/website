@@ -19,8 +19,23 @@
           <div class="export_buttons_holder" id="export_buttons_holder">
             
           </div>
+          Import your data!
           <div class="import_buttons_holder">
-
+            <div class="import_button">
+              <label for="decks">Import decks:</label>
+              <input type="file" id="decks" name="decks" accept="application/json"/>
+              <button id="submit_decks" onclick="submit_decks()">Submit!</button>
+            </div>
+            <div class="import_button">
+              <label for="timer_stats">Import timer stats:</label>
+              <input type="file" id="timer_stats" name="timer_stats" accept="application/json" />
+              <button id="submit_timer" onclick="submit_stats()">Submit!</button>
+            </div>
+            <div class="import_button">
+              <label for="todolist">To-do list:</label>
+              <input type="file" id="todolist" name="todolist" accept="application/json"/>
+              <button id="submit_todo" onclick="submit_todo()">Submit!</button>
+            </div>
           </div>
         </div>
       </div>

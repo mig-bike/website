@@ -6,6 +6,12 @@ var select_decks = document.getElementById("download_select_decks");
 
 var export_buttons_holder = document.getElementById("export_buttons_holder");
 
+var import_decks = document.getElementById("decks");
+var import_timer = document.getElementById("timer_stats");
+var import_todo = document.getElementById("todolist");
+
+//from https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
+
 initialize_buttons();
 
 function initialize_buttons(){
@@ -36,4 +42,57 @@ function create_export_button(button_name){
 
   outer_link.appendChild(inner_button);
   return outer_link;
+}
+
+function submit_decks(){
+  let deck_file = import_decks.files[0];
+  if(deck_file == undefined){
+    alert("Attatch a valid file!");
+    console.log("Attatch a valid file!");
+  }
+  else{
+    localStorage.setItem("deck_of_decks", deck_file);
+    console.log(deck_file);
+  }
+}
+
+function submit_stats(){
+  let stats_file = import_timer.files[0];
+  let stats_file_contents;
+
+  const reader = new FileReader();
+  reader.readAsText(stats_file);
+
+  reader.addEventListener("load", function(){
+    stats_file_contents = reader.result;
+    if(stats_file == undefined){
+      alert("Attatch a valid file!");
+      console.log("Attatch a valid file!");
+    }
+    else{
+      localStorage.setItem("study_stats", stats_file_contents);
+      console.log(stats_file);
+    }
+    console.log(stats_file_contents);
+  })
+}
+
+function submit_todo(){
+  const todo_file = import_todo.files[0];
+  //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
+
+  const reader = new FileReader();
+  reader.readAsText(todo_file);
+  console.log(reader.readyState);
+
+  let todo_file_contents = reader.result;
+  console.log(todo_file_contents);
+  if(todo_file == undefined){
+    alert("Attatch a valid file!");
+    console.log("Attatch a valid file!");
+  }
+  else{
+    localStorage.setItem("list_html", todo_file_contents);
+    console.log(todo_file);
+  }
 }
