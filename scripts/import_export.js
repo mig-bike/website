@@ -44,55 +44,32 @@ function create_export_button(button_name){
   return outer_link;
 }
 
-function submit_decks(){
-  let deck_file = import_decks.files[0];
-  if(deck_file == undefined){
-    alert("Attatch a valid file!");
-    console.log("Attatch a valid file!");
+function submit_file(file_holder, file_dest){
+  let file = file_holder.files[0];
+  let file_contents;
+
+  if(file == undefined){
+    alert("Attatch a valid file!")
   }
   else{
-    localStorage.setItem("deck_of_decks", deck_file);
-    console.log(deck_file);
+    const reader = new FileReader();
+    reader.readAsText(file);
+
+    reader.addEventListener("load", function(){
+      file_contents = reader.result;
+      localStorage.setItem(file_dest, file_contents);
+    })
   }
+}
+
+function submit_decks(){
+  submit_file(import_decks, "deck_of_decks");
 }
 
 function submit_stats(){
-  let stats_file = import_timer.files[0];
-  let stats_file_contents;
-
-  const reader = new FileReader();
-  reader.readAsText(stats_file);
-
-  reader.addEventListener("load", function(){
-    stats_file_contents = reader.result;
-    if(stats_file == undefined){
-      alert("Attatch a valid file!");
-      console.log("Attatch a valid file!");
-    }
-    else{
-      localStorage.setItem("study_stats", stats_file_contents);
-      console.log(stats_file);
-    }
-    console.log(stats_file_contents);
-  })
+  submit_file(import_timer, "study_stats");
 }
 
 function submit_todo(){
-  const todo_file = import_todo.files[0];
-  //https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
-
-  const reader = new FileReader();
-  reader.readAsText(todo_file);
-  console.log(reader.readyState);
-
-  let todo_file_contents = reader.result;
-  console.log(todo_file_contents);
-  if(todo_file == undefined){
-    alert("Attatch a valid file!");
-    console.log("Attatch a valid file!");
-  }
-  else{
-    localStorage.setItem("list_html", todo_file_contents);
-    console.log(todo_file);
-  }
+  submit_file(import_todo, "todo_html");
 }
