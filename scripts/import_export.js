@@ -228,5 +228,5 @@ function submit_stats(){
 }
 
 function submit_todo(){
-  submit_file(import_todo, "todo_html");
+  submit_file(import_todo, "list_html");
 }
