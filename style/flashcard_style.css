@@ -221,6 +221,9 @@
   word-break: break-word;
   padding: 0.5em;
 }
+.flashcard_back{
+  font-size: 12px;
+}
 
 .flashcard_front{
   border-bottom: solid;
@@ -228,6 +231,7 @@
 
 .flashcard:hover{
   background-color: rgb(240, 240, 240);
+
 }
 
 .flashcard:active{
