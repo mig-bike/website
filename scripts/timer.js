@@ -96,7 +96,9 @@ function setPomodoroTime(){
 }
 
 function pomodoroTime(time_to_use){
+    hours.value = 0;
     minutes.value = time_to_use;
+    seconds.value = 0;
     disable_Timer(true);
     setTime();
     startTimer();

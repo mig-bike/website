@@ -40,6 +40,8 @@
   background-image: url("../images/timer.png");
   width: 50%;
   height: 65%;
+  min-width: 500px;
+  min-height: 500px;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 450px;
@@ -53,10 +55,6 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 25px;
-}
-
-.time_input_holder{
-  
 }
 
 .timer{

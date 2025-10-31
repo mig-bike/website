@@ -20,6 +20,57 @@
   transition-duration: 0.1s;
 }
 
+.todo-title{
+  background-color: rgb(217, 217, 241);
+  width: 50%;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 0.5em;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.add_item_label{
+  flex: 1;
+}
+.add_item_box{
+  flex: 2;
+    height: 30px;
+
+}
+.submit_todo_button{
+  flex: 1;
+  cursor: pointer;
+  border: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  height: 35px;
+  background-color: rgb(210, 255, 218);
+  transition-duration: 0.15s;
+}
+
+.submit_todo_button:hover{
+  background-color: rgb(155, 221, 155);
+}
+
+.submit_todo_button:active{
+  background-color: rgb(86, 155, 86);
+  color: white;
+  border-color: black;
+}
+
+.todo-form{
+  height: 30px;
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  margin: auto;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 .delete_button, .check_button{
   height: 100%;
   color: black;

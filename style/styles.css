@@ -65,7 +65,7 @@ ul {
 .website {
   display: flex;
   flex-direction: row;
-  flex: 2;
+  margin-top: 0;
 }
 .sidebar {
   display: flex;
@@ -78,12 +78,11 @@ ul {
   padding: 1em;
 }
 .content {
-  min-height: 800px;
   flex: 5;
 }
 .big-div{
     display: grid;
-    grid-template-rows: 1fr 7fr 1fr;
+    grid-template-rows: 120px 7fr 1fr;
 }
 .boxes {
   display: flex;
@@ -146,12 +145,10 @@ footer {
   transition-duration: 0.15s;
 }
 .go-button:hover {
-  background-color: rgb(11, 59, 39);
-  color: white;
+  background-color: rgb(153, 239, 203);
 }
 .go-button:active {
-  background-color: rgb(141, 225, 247);
-  color: black;
+  background-color: rgb(105, 216, 153);
 }
 
 .welcome {

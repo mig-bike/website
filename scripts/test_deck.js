@@ -1,5 +1,3 @@
-var mcq_button = document.getElementById("mcq");
-var frq_button = document.getElementById("frq");
 var unlearned_button = document.getElementById("learned");
 var partial_button = document.getElementById("partial");
 var all_flashcards_button = document.getElementById("all");
@@ -11,6 +9,8 @@ var current_modes = [];
 var spaced_rep_array = [0,1,6,16];
 
 var deck_of_decks;
+
+current_modes.push('');
 
 if (localStorage.getItem("deck_of_decks") === null) {
     deck_of_decks = [];
@@ -110,12 +110,6 @@ function clearHTML() {
 }
 
 function findModes() {
-  if (mcq_button.checked) {
-    current_modes.push("mcq");
-  } else {
-    current_modes.push("frq");
-  }
-
   if (unlearned_button.checked) {
     current_modes.push("unlearned");
   } else if(partial_button.checked){
@@ -192,6 +186,7 @@ function review_test(){
 
     if(current_modes[1] == "learned"){
       for(var i = 0; i < correct_answers.length; i++){
+        console.log("hello");
         if(correct_answers[i].checked){ //if they have a correct answer
           if(current_deck[i][2] == '0' || current_deck[i][2] == '1'){
             current_deck[i][2] = (++current_deck[i][2]).toString(); //learned value increase
@@ -290,17 +285,6 @@ function createButtons(index_of_card) {
 
 function checkInputs() {
   let number_of_checks = 0;
-  if(mcq_button.checked){
-    number_of_checks++;
-  }
-  if(frq_button.checked){
-    number_of_checks++;
-  }
-  if(number_of_checks != 1){
-    return false;
-  }
-
-  number_of_checks = 0;
 
   if(unlearned_button.checked){
     number_of_checks++;

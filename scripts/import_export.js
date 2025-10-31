@@ -62,6 +62,7 @@ function delete_checklist(){
 function create_checklist(){
   let instructions = document.createElement("div");
   instructions.innerHTML = "Select decks to export!";
+  instructions.className = "instructions";
   checklist_decks_holder.appendChild(instructions);
 
   for(var i = 0; i < dod.length; i++){
@@ -83,6 +84,8 @@ function create_submit_button(){
 
 function create_checkbox(index){
   let checkbox_holder = document.createElement("div");
+  checkbox_holder.className = "checkbox_holder";
+
   let checkbox = document.createElement("input");
   checkbox.id = index;
   checkbox.className = "input_check";
@@ -115,8 +118,8 @@ function create_new_buttons(array_of_submitted){
     selected_no_progress.setAttribute("href", data_no_progress);
   }
   else{
-    create_download_button(JSON.stringify(deck_to_save), "selected_progress", "Download selected decks! (Progress saved)");
-    create_download_button(JSON.stringify(make_empty_deck(deck_to_save)), "selected_no_progress", "Download selected decks! (Progress deleted)");
+    create_download_button(JSON.stringify(deck_to_save), "selected_progress", "Export selected decks! (Progress saved)");
+    create_download_button(JSON.stringify(make_empty_deck(deck_to_save)), "selected_no_progress", "Export selected decks! (Progress deleted)");
   }
   already_created_buttons = true;
 }
@@ -168,15 +171,15 @@ function make_empty_deck(target_dod){
 
 function initialize_buttons(){
   //will initialize to empty array if it doesn't work
-  create_download_button(localStorage.getItem("deck_of_decks"), "all_decks_with_progress", "Download all your decks! (progress saved)");
-  create_download_button(localStorage.getItem("study_stats"), "study_timer_stats", "Download your timer statistics!");
-  create_download_button(localStorage.getItem("list_html"), "todolist", "Download your to-do list!");
-  create_download_button(JSON.stringify(make_empty_deck(dod)), "all_decks_without_progress", "Download all your decks! (progress deleted)");
+  create_download_button(localStorage.getItem("deck_of_decks"), "all_decks_with_progress", "Export all decks! (progress saved)");
+  create_download_button(localStorage.getItem("study_stats"), "study_timer_stats", "Export timer statistics!");
+  create_download_button(localStorage.getItem("list_html"), "todolist", "Export to-do list!");
+  create_download_button(JSON.stringify(make_empty_deck(dod)), "all_decks_without_progress", "Export all decks! (progress deleted)");
 }
 
 //from https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
 function create_download_button(data_to_download, name_of_download, button_name){
-  if(data_to_download != null){
+  if(data_to_download != null && data_to_download != '[]'){
     let link_element = create_export_button(button_name);
     let data_to_page = "data:text/json;charset=utf-8," + encodeURIComponent(data_to_download);
     link_element.setAttribute("href", data_to_page);

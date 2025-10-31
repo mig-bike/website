@@ -4,7 +4,7 @@
   <head>
     <title>Import / Export</title>
     <link rel="stylesheet" href="../style/styles.css" />
-    <link rel="stylesheet" href="../style/flashcard_style.css" />
+    <link rel="stylesheet" href="../style/import_export_style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -15,31 +15,33 @@
       <custom-header></custom-header>
       <div class="website">
         <div class="content">
-          Export your data!
+          <div class="export_data_text">
+            Export your data!
+          </div>
           <div class="export_buttons_holder" id="export_buttons_holder">
-            <button class="export_select_decks" id="export_select_decks" onclick="export_select_decks()">
+            <button class="export_button" id="export_select_decks" onclick="export_select_decks()">
               Export selected decks!
             </button>
           </div>
           <div class="checklist_decks_holder" id="checklist_decks_holder">
             
           </div>
-          Import your data!
+          <div class="import_data_text">Import your data!</div>
           <div class="import_buttons_holder">
             <div class="import_button">
               <label for="decks">Import decks:</label>
-              <input type="file" id="decks" name="decks" accept="application/json"/>
-              <button id="submit_decks" onclick="submit_decks()">Submit!</button>
+              <input class="file_choose" type="file" id="decks" name="decks" accept="application/json"/>
+              <button class="file_upload" id="submit_decks" onclick="submit_decks()">Submit!</button>
             </div>
             <div class="import_button">
               <label for="timer_stats">Import timer stats:</label>
-              <input type="file" id="timer_stats" name="timer_stats" accept="application/json" />
-              <button id="submit_timer" onclick="submit_stats()">Submit!</button>
+              <input class="file_choose" type="file" id="timer_stats" name="timer_stats" accept="application/json" />
+              <button class="file_upload" id="submit_timer" onclick="submit_stats()">Submit!</button>
             </div>
             <div class="import_button">
               <label for="todolist">To-do list:</label>
-              <input type="file" id="todolist" name="todolist" accept="application/json"/>
-              <button id="submit_todo" onclick="submit_todo()">Submit!</button>
+              <input class="file_choose" type="file" id="todolist" name="todolist" accept="application/json"/>
+              <button class="file_upload" id="submit_todo" onclick="submit_todo()">Submit!</button>
             </div>
           </div>
           <button class="delete_data" id="delete_data" onclick="delete_data();">Delete all data</button>

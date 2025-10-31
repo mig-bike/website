@@ -1,13 +1,25 @@
 .stats_holder{
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   border-style: solid;
   padding: 1em;
+  width: 65%;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background-color: white;
+  gap: 10px;
 }
-.statistic{
+
+.label_for_stats{
   font-weight: bold;
-  margin-bottom: 5px;
-  margin-top: 5px;
+}
+
+.statistic{
+  padding: 0.4em;
+  background-color: rgb(185, 234, 250);
+}
+
+.statistic:hover{
+  background-color: rgb(215, 242, 253);
 }
