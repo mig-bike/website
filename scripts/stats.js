@@ -164,12 +164,34 @@ var flashcards_learned_html = document.getElementById("flashcards_learned");
 var flashcards_partial_html = document.getElementById("flashcards_partial");
 var times_studied_html = document.getElementById("times_studied");
 
+function formatSeconds(seconds_to_format){
+  var hours = Math.floor(seconds_to_format/3600);
+  seconds_to_format -= hours * 3600;
+  var minutes = Math.floor(seconds_to_format/60);
+  seconds_to_format -= minutes * 60;
+  
+  var string_to_return = "";
+  if(hours > 0){
+    string_to_return += hours;
+    string_to_return += "h ";
+  }
+  if(minutes > 0){
+    string_to_return += minutes;
+    string_to_return += "m ";
+  }
+  if(seconds_to_format > 0){
+    string_to_return += seconds_to_format;
+    string_to_return += "s";
+  }
+  return string_to_return;
+}
+
 document.addEventListener("DOMContentLoaded", function(){
   findTimerVariables();
-  total_time_html.innerHTML += total_time + "s";
-  max_time_day_html.innerHTML += max_time_day + "s";
-  time_this_week_html.innerHTML += time_this_week + "s";
-  time_today_html.innerHTML += time_today + "s";
+  total_time_html.innerHTML += formatSeconds(total_time);
+  max_time_day_html.innerHTML += formatSeconds(max_time_day);
+  time_this_week_html.innerHTML += formatSeconds(time_this_week);
+  time_today_html.innerHTML += formatSeconds(time_today);
   streak_html.innerHTML += streak != 1 ? streak + " days": streak + " day";
 
   findFlashcardVariables();
