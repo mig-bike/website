@@ -253,6 +253,12 @@
   perspective: 1000px;
 }
 
+/*
+
+THE FLASHCARD ANIMATION WAS ADOPTED FROM https://3dtransforms.desandro.com/card-flip and some youtube tutorials on it
+
+*/
+
 .flashcard_animated{
   height: 100%;
   width: 100%;
